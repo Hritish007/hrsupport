@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Support</title>
-        <link rel="icon" type="image/png" href="hrk.png.jpg">
+    <link rel="icon" type="image/png" href="hrk.png.jpg">
 
     <style>
         :root {
@@ -90,6 +90,18 @@
             min-width: 200px;
         }
 
+        .form-group.username {
+            flex: 0 0 200px; /* Smaller width for username */
+        }
+
+        .form-group.phone {
+            flex: 0 0 200px; /* Smaller width for phone */
+        }
+
+        .form-group.issue {
+            flex: 2 0 300px; /* Larger width for issue description */
+        }
+
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
@@ -124,7 +136,7 @@
 
         .delete-btn {
             background-color: var(--error-color);
-            color: black;
+            color: white;
             padding: 0.5rem;
             border: none;
             border-radius: 4px;
@@ -137,7 +149,24 @@
             background-color: #b91c1c;
         }
 
-        
+        .solved-checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--success-color);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            height: fit-content;
+        }
+
+        .checkbox-container label {
+            font-weight: 500;
+        }
+
         .loading::after {
             content: '';
             display: inline-block;
@@ -176,7 +205,6 @@
             text-align: center;
         }
 
-        /* Section styling */
         .section {
             background-color: #ffffff;
             padding: 20px;
@@ -188,6 +216,7 @@
             box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
             margin-bottom: 30px;
         }
+
         .modal-buttons {
             display: flex;
             gap: 1rem;
@@ -219,6 +248,17 @@
             .delete-btn {
                 width: 100%;
             }
+
+            .checkbox-container {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .form-group.username,
+            .form-group.phone,
+            .form-group.issue {
+                flex: 1 0 100%; /* Full width on mobile */
+            }
         }
     </style>
 </head>
@@ -226,15 +266,14 @@
     <header>
         <nav class="navbar container">
             <a href="#" class="navbar-brand">HR Support</a>
-           <nav class="navbar">
-        <a href="Router.html"><img src="router.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="Account.html"><img src="account.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="index.html"><img src="slow.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="TV.html"><img src="iptv.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="myworldlink.html"><img src="myworldlink.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="Ownpin.html"><img src="own.png.jpg" alt="Clickable Image" width="50"></a>
-
-    </nav>
+            <nav class="navbar">
+                <a href="Router.html"><img src="router.png.jpg" alt="Clickable Image" width="50"></a>
+                <a href="Account.html"><img src="account.png.jpg" alt="Clickable Image" width="50"></a>
+                <a href="Slow.html"><img src="slow.png.jpg" alt="Clickable Image" width="50"></a>
+                <a href="TV.html"><img src="iptv.png.jpg" alt="Clickable Image" width="50"></a>
+                <a href="myworldlink.html"><img src="myworldlink.png.jpg" alt="Clickable Image" width="50"></a>
+                <a href="Ownpin.html"><img src="own.png.jpg" alt="Clickable Image" width="50"></a>
+            </nav>
         </nav>
     </header>
 
@@ -243,25 +282,28 @@
             <form id="userForm" aria-labelledby="form-title">
                 <h2 id="form-title">Report an Issue</h2>
                 <div class="form-row">
-                    <div class="form-group">
+                    <div class="form-group username">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="Enter username" required aria-describedby="username-error">
                         <div class="error-message" id="username-error">Please enter a valid username</div>
                     </div>
-                    <div class="form-group">
-  <label for="phone">Contact Number</label>
-  <input type="tel" id="phone" name="phone" placeholder="Enter up to 15-digit number" required pattern="^\d{7,15}$"maxlength="15"/>
-  
-</div>
-
-                    <div class="form-group">
+                    <div class="form-group phone">
+                        <label for="phone">Contact Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Called Number." required pattern="^\d{7,15}$" maxlength="15" onkeypress="restrictToNumbers(event)" aria-describedby="phone-error">
+                        <div class="error-message" id="phone-error">Please enter a valid phone number (7-15 digits)</div>
+                    </div>
+                    <div class="form-group issue">
                         <label for="issue">Issue Description</label>
                         <input type="text" id="issue" name="issue" placeholder="Describe your issue" required aria-describedby="issue-error">
                         <div class="error-message" id="issue-error">Please describe the issue</div>
                     </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="solved-checkbox" aria-label="Mark as solved">
+                        <label for="solved">Solved</label>
+                    </div>
                     <button type="button" class="delete-btn" aria-label="Delete this row" disabled>Delete</button>
                 </div>
-                <button type="submit" id="submit-btn"></button>
+               
             </form>
         </div>
     </main>
@@ -290,6 +332,47 @@
         const yearSpan = document.getElementById('year');
         yearSpan.textContent = new Date().getFullYear();
 
+        // Restrict contact number input to digits only
+        function restrictToNumbers(event) {
+            const charCode = event.which || event.keyCode;
+            // Allow only digits (0-9), backspace (8), and enter (13)
+            if (charCode !== 8 && charCode !== 13 && (charCode < 48 || charCode > 57)) {
+                event.preventDefault();
+            }
+        }
+
+        // Load saved form data from localStorage
+        function loadFormData() {
+            const savedData = localStorage.getItem('formData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                data.forEach((row, index) => {
+                    if (index === 0) {
+                        const firstRow = form.querySelector('.form-row');
+                        firstRow.querySelector('#username').value = row.username || '';
+                        firstRow.querySelector('#phone').value = row.phone || '';
+                        firstRow.querySelector('#issue').value = row.issue || '';
+                        firstRow.querySelector('.solved-checkbox').checked = row.solved || false;
+                        firstRow.querySelector('.delete-btn').disabled = !row.solved;
+                    } else {
+                        addNewRow(row);
+                    }
+                });
+            }
+        }
+
+        // Save form data to localStorage
+        function saveFormData() {
+            const rows = form.querySelectorAll('.form-row');
+            const data = Array.from(rows).map(row => ({
+                username: row.querySelector('input[name="username"]').value,
+                phone: row.querySelector('input[name="phone"]').value,
+                issue: row.querySelector('input[name="issue"]').value,
+                solved: row.querySelector('.solved-checkbox').checked
+            }));
+            localStorage.setItem('formData', JSON.stringify(data));
+        }
+
         function validateInput(input) {
             const errorElement = document.getElementById(`${input.id}-error`);
             if (!input.value.trim()) {
@@ -304,8 +387,14 @@
         }
 
         function validatePhone(input) {
-            const errorElement = document.getElementById(`${input.id}-error`);
-            const phoneRegex = /^\d{10}$/;
+            const errorElement = document.getElementById(`${input.id}-error`) || document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.id = `${input.id}-error`;
+            errorElement.textContent = 'Please enter a valid phone number (7-15 digits)';
+            if (!input.parentElement.contains(errorElement)) {
+                input.parentElement.appendChild(errorElement);
+            }
+            const phoneRegex = /^\d{7,15}$/;
             if (!phoneRegex.test(input.value)) {
                 input.classList.add('error');
                 errorElement.style.display = 'block';
@@ -318,15 +407,17 @@
         }
 
         function updateDeleteButtons() {
-            const deleteButtons = form.querySelectorAll('.delete-btn');
             const rows = form.querySelectorAll('.form-row');
-            deleteButtons.forEach(button => {
-                button.disabled = rows.length === 1;
+            rows.forEach(row => {
+                const checkbox = row.querySelector('.solved-checkbox');
+                const deleteBtn = row.querySelector('.delete-btn');
+                deleteBtn.disabled = !checkbox.checked;
             });
         }
 
         function addInputListeners(row) {
-            const inputs = row.querySelectorAll('input');
+            const inputs = row.querySelectorAll('input:not(.solved-checkbox)');
+            const checkbox = row.querySelector('.solved-checkbox');
             const deleteBtn = row.querySelector('.delete-btn');
 
             inputs.forEach((input, index) => {
@@ -348,17 +439,24 @@
                     } else {
                         validateInput(input);
                     }
+                    saveFormData();
                 });
+            });
+
+            checkbox.addEventListener('change', () => {
+                deleteBtn.disabled = !checkbox.checked;
+                saveFormData();
             });
 
             deleteBtn.addEventListener('click', () => {
                 row.remove();
                 updateDeleteButtons();
+                saveFormData();
             });
         }
 
-        function addNewRow() {
-            const inputs = form.querySelectorAll('.form-row:last-child input');
+        function addNewRow(savedData = null) {
+            const inputs = form.querySelectorAll('.form-row:last-child input:not(.solved-checkbox)');
             const allValid = Array.from(inputs).every(input => 
                 input.id.includes('phone') ? validatePhone(input) : validateInput(input)
             );
@@ -372,32 +470,45 @@
             const newRow = document.createElement('div');
             newRow.className = 'form-row';
             newRow.innerHTML = `
-                <div class="form-group">
+                <div class="form-group username">
                     <label for="username-${timestamp}">Username</label>
                     <input type="text" id="username-${timestamp}" name="username" placeholder="Enter username" required aria-describedby="username-${timestamp}-error">
                     <div class="error-message" id="username-${timestamp}-error">Please enter a valid username</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group phone">
                     <label for="phone-${timestamp}">Contact Number</label>
-                    <input type="tel" id="phone-${timestamp}" name="phone" placeholder="Contact Number" required pattern="^\d{15}$" maxlength="15" aria-describedby="phone-${timestamp}-error">
-                    
+                    <input type="tel" id="phone-${timestamp}" name="phone" placeholder="Called Number." required pattern="^\d{7,15}$" maxlength="15" onkeypress="restrictToNumbers(event)" aria-describedby="phone-${timestamp}-error">
+                    <div class="error-message" id="phone-${timestamp}-error">Please enter a valid phone number (7-15 digits)</div>
                 </div>
-                <div class="form-group">
+                <div class="form-group issue">
                     <label for="issue-${timestamp}">Issue Description</label>
                     <input type="text" id="issue-${timestamp}" name="issue" placeholder="Describe your issue" required aria-describedby="issue-${timestamp}-error">
                     <div class="error-message" id="issue-${timestamp}-error">Please describe the issue</div>
                 </div>
-                <button type="button" class="delete-btn" aria-label="Delete this row">Delete</button>
+                <div class="checkbox-container">
+                    <input type="checkbox" class="solved-checkbox" id="solved-${timestamp}" aria-label="Mark as solved">
+                    <label for="solved-${timestamp}">Solved</label>
+                </div>
+                <button type="button" class="delete-btn" aria-label="Delete this row" disabled>Delete</button>
             `;
             form.insertBefore(newRow, submitBtn);
             addInputListeners(newRow);
             updateDeleteButtons();
-            newRow.querySelector('input').focus();
+
+            if (savedData) {
+                newRow.querySelector(`#username-${timestamp}`).value = savedData.username || '';
+                newRow.querySelector(`#phone-${timestamp}`).value = savedData.phone || '';
+                newRow.querySelector(`#issue-${timestamp}`).value = savedData.issue || '';
+                newRow.querySelector(`#solved-${timestamp}`).checked = savedData.solved || false;
+                newRow.querySelector('.delete-btn').disabled = !savedData.solved;
+            }
+
+            newRow.querySelector('input:not(.solved-checkbox)').focus();
         }
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const inputs = form.querySelectorAll('input');
+            const inputs = form.querySelectorAll('input:not(.solved-checkbox)');
             const allValid = Array.from(inputs).every(input => 
                 input.id.includes('phone') ? validatePhone(input) : validateInput(input)
             );
@@ -417,11 +528,12 @@
             const formData = new FormData(form);
             const data = [];
             const rows = form.querySelectorAll('.form-row');
-            rows.forEach(() => {
+            rows.forEach(row => {
                 data.push({
-                    username: formData.get('username'),
-                    phone: formData.get('phone'),
-                    issue: formData.get('issue')
+                    username: row.querySelector('input[name="username"]').value,
+                    phone: row.querySelector('input[name="phone"]').value,
+                    issue: row.querySelector('input[name="issue"]').value,
+                    solved: row.querySelector('.solved-checkbox').checked
                 });
             });
 
@@ -438,6 +550,7 @@
                     if (index > 0) row.remove();
                 });
                 updateDeleteButtons();
+                localStorage.removeItem('formData');
             } catch (error) {
                 alert('Error submitting form. Please try again.');
             } finally {
@@ -451,8 +564,10 @@
             confirmModal.style.display = 'none';
         });
 
+        // Initialize form
         document.querySelectorAll('.form-row').forEach(addInputListeners);
         updateDeleteButtons();
+        loadFormData();
     </script>
 </body>
 </html>
