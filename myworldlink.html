@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Support</title>
+    <link rel="icon" type="image/png" href="hrk.png.jpg">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1f2937;
+            --success-color: #16a34a;
+            --error-color: #dc2626;
+            --background-color: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+             gap: 1rem;
+        }
+
+    .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links img {
+            width: 40px;
+            transition: transform 0.2s;
+        }
+        /* Section styling */
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            border-right: 5px solid #3498db;
+            border-top: 1px solid #3498db;
+            border-bottom: 1px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+
+        .note-card { 
+            border-left: 5px solid #3498db;
+            border-right: 5px solid #3498db;
+            border-top: 1px solid #3498db;
+            border-bottom: 1px solid #3498db;
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            position: relative;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .note-card.edited {
+            border-left-color: var(--success-color);
+            opacity: 0.8;
+        }
+
+        .note-card.editing .note-content {
+            display: none;
+        }
+
+        .note-card.editing .edit-form {
+            display: block;
+        }
+
+        .note-card .note-content {
+            margin-bottom: 0.5rem;
+        }
+
+        .note-card .note-content p {
+            margin-bottom: 0.5rem;
+        }
+
+        .note-card .edit-form {
+            display: none;
+        }
+
+        .note-card .edit-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .note-card .edit-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .note-card .actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .note-card button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: background-color 0.2s;
+            position: relative;
+        }
+
+        .note-card .reset-btn {
+            background-color: #f59e0b;
+            color: white;
+        }
+
+        .note-card .reset-btn:hover {
+            background-color: #d97706;
+        }
+
+        .note-card .copy-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .note-card .copy-btn:hover:not(:disabled) {
+            background-color: #1d4ed8;
+        }
+
+        .note-card .copy-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        .note-card .copy-btn.copied::after {
+            content: 'Copied!';
+            position: absolute;
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .note-card .copy-btn.copied {
+            background-color: var(--success-color);
+        }
+
+        .add-note-form {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .submit-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 100%;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links img {
+                width: 30px;
+            }
+
+            .note-card {
+                padding: 0.75rem;
+            }
+
+            .note-card .actions {
+                flex-direction: column;
+            }
+
+            .note-card button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+   <header>
+        <nav class="navbar container">
+            <a href="#" class="navbar-brand">HR Support</a>
+           <nav class="navbar">
+        <a href="Router.html"><img src="router.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Account.html"><img src="account.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Slow.html"><img src="slow.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="TV.html"><img src="iptv.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="myworldlink.html"><img src="myworldlink.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Ownpin.html"><img src="own.png.jpg" alt="Clickable Image" width="50"></a>
+
+    </nav>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="section" aria-labelledby="myWorldLink">
+            <h2>myworldlink </h2>
+            <div id="notes-container">
+                <h4>For Android Users</h4>
+                
+                 <div class="section">
+
+        <pre>
+            <span class="comment"><b>Note: If client have andriod verson 12 or higher simply follow iPhone/Windows/PC steps.
+            1. Go to Wi-Fi Settings and select the SSID "myWorldLink".
+            2. Click on “myWorldLink” SSID from the list.
+            3. Now Click on “Advance Options“
+            4. Select “PEAP” in the EAP method
+            5. Select “MSCHAPV2” in Phase 2 authentication
+            6. Select "Do not validate" or "Unspecified" in the CA certificate field.
+            7. Type your WorldLink account Username in Identity
+            8. Ignore other fields
+            9. In the Password section, enter your WorldLink Online Service password.
+            10. Click "CONNECT".</span></b></pre>
+    </div>
+            </div>
+
+             <div id="notes-container">
+                <h4>For Android Users</h4>
+                
+                 <div class="section">
+
+        <pre><strong>
+            1. Go to Settings and Select Wi-Fi
+            2. Select “myWorldLink” SSID from the list
+            3. Type your WorldLink account “Username & Password”
+            4. Click “CONNECT” </strong></pre>
+    </div>
+                    
+                    </form>
+
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+    <script>
+        const notesContainer = document.getElementById('notes-container');
+        const addNoteForm = document.getElementById('addNoteForm');
+        const newNoteInput = document.getElementById('newNote');
+        const yearSpan = document.getElementById('year');
+        let noteIdCounter = 6; // Start after initial notes
+
+        // Update year
+        yearSpan.textContent = new Date().getFullYear();
+
+        // Validate note input
+        function validateNoteInput(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            if (!input.value.trim()) {
+                input.classList.add('error');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('error');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        // Fallback copy function using document.execCommand
+        function fallbackCopyText(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            let success = false;
+            try {
+                success = document.execCommand('copy');
+            } catch (err) {
+                console.error('Fallback copy error:', err);
+            }
+            document.body.removeChild(textArea);
+            return success;
+        }
+
+        // Add event listeners to note cards
+        function addNoteListeners(noteCard) {
+            const editBtn = noteCard.querySelector('.edit-btn');
+            const copyBtn = noteCard.querySelector('.copy-btn');
+            const editForm = noteCard.querySelector('.edit-form');
+            const textarea = editForm.querySelector('textarea');
+            const noteContent = noteCard.querySelector('.note-content');
+
+            // Initialize textarea with current note text
+            const currentText = Array.from(noteContent.querySelectorAll('p'))
+                .map(p => p.textContent.trim())
+                .filter(text => text)
+                .join('\n');
+            textarea.value = currentText;
+
+            editBtn.addEventListener('click', () => {
+                if (noteCard.classList.contains('editing')) {
+                    // Save changes
+                    const newText = textarea.value.trim();
+                    if (!newText) {
+                        alert('Note cannot be empty.');
+                        return;
+                    }
+                    // Update note content
+                    noteContent.innerHTML = newText.split('\n')
+                        .map(line => `<p>${line}</p>`)
+                        .join('');
+                    noteCard.classList.remove('editing');
+                    noteCard.classList.add('edited');
+                    editBtn.textContent = 'Reset';
+                    editBtn.classList.remove('save-btn');
+                    editBtn.classList.add('reset-btn');
+                    copyBtn.disabled = false; // Enable copy button
+                } else if (noteCard.classList.contains('edited')) {
+                    // Reset to original text
+                    const originalText = noteCard.dataset.originalText;
+                    noteContent.innerHTML = originalText.split('\n')
+                        .map(line => `<p>${line}</p>`)
+                        .join('');
+                    textarea.value = originalText;
+                    noteCard.classList.remove('edited');
+                    editBtn.textContent = 'Edit';
+                    editBtn.classList.remove('reset-btn');
+                    editBtn.classList.add('edit-btn');
+                    copyBtn.disabled = false; // Enable="/" copy button
+                } else {
+                    // Enter edit mode
+                    noteCard.classList.add('editing');
+                    editBtn.textContent = 'Save';
+                    editBtn.classList.remove('edit-btn');
+                    editBtn.classList.add('save-btn');
+                    textarea.focus();
+                    copyBtn.disabled = true; // Disable copy button
+                }
+            });
+
+            copyBtn.addEventListener('click', () => {
+                const noteText = Array.from(noteContent.querySelectorAll('p'))
+                    .map(p => p.textContent.trim())
+                    .filter(text => text)
+                    .join('\n');
+
+                if (!noteText) {
+                    alert('No text to copy in this note.');
+                    return;
+                }
+
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(noteText).then(() => {
+                        copyBtn.classList.add('copied');
+                        setTimeout(() => {
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    }).catch(err => {
+                        console.warn('Clipboard API failed:', err);
+                        if (fallbackCopyText(noteText)) {
+                            copyBtn.classList.add('copied');
+                            setTimeout(() => {
+                                copyBtn.classList.remove('copied');
+                            }, 2000);
+                        } else {
+                            alert('Failed to copy note. Please select and copy manually.');
+                        }
+                    });
+                } else {
+                    if (fallbackCopyText(noteText)) {
+                        copyBtn.classList.add('copied');
+                        setTimeout(() => {
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    } else {
+                        alert('Failed to copy note. Please select and copy manually.');
+                    }
+                }
+            });
+        }
+
+        // Initialize existing notes
+        document.querySelectorAll('.note-card').forEach(addNoteListeners);
+
+        // Handle new note submission
+        addNoteForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!validateNoteInput(newNoteInput)) {
+                alert('Please enter a valid note.');
+                return;
+            }
+
+            const noteText = newNoteInput.value.trim();
+            const noteCard = document.createElement('div');
+            noteCard.className = 'note-card';
+            noteCard.dataset.id = noteIdCounter++;
+            noteCard.dataset.originalText = noteText;
+            noteCard.innerHTML = `
+                <div class="note-content">
+                    <p>${noteText}</p>
+                </div>
+                <form class="edit-form">
+                    <textarea rows="4" aria-label="Edit note text">${noteText}</textarea>
+                </form>
+                <div class="actions">
+                    <button class="edit-btn" aria-label="Edit note">Edit</button>
+                    <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                </div>
+            `;
+            notesContainer.appendChild(noteCard);
+            addNoteListeners(noteCard);
+            addNoteForm.reset();
+            newNoteInput.focus();
+        });
+
+        // Input validation on change
+        newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
+    </script>
+</body>
+</html>

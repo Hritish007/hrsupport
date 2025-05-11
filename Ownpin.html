@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Support</title>
+        <link rel="icon" type="image/png" href="hrk.png.jpg">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1f2937;
+            --error-color: #dc2626;
+            --success-color: #16a34a;
+            --disabled-color: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: #f3f4f6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links img {
+            width: 40px;
+            transition: transform 0.2s;
+        }
+
+        .nav-links img:hover {
+            transform: scale(1.1);
+        }
+
+        .form-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: var(--error-color);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .delete-btn {
+            background-color: var(--error-color);
+            color: black;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            height: fit-content;
+        }
+
+        .delete-btn:hover {
+            background-color: #b91c1c;
+        }
+
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        /* Section styling */
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            border-left: 5px solid #3498db;
+            border-right: 5px solid #3498db;
+            border-top: 1px solid #3498db;
+            border-bottom: 1px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+            margin-bottom: 30px;
+        }
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .modal-buttons button {
+            padding: 0.5rem 1rem;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .nav-links img {
+                width: 30px;
+            }
+
+            .delete-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a href="#" class="navbar-brand">HR Support</a>
+           <nav class="navbar">
+        <a href="Router.html"><img src="router.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Account.html"><img src="account.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Slow.html"><img src="slow.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="TV.html"><img src="iptv.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="myworldlink.html"><img src="myworldlink.png.jpg" alt="Clickable Image" width="50"></a>
+        <a href="Ownpin.html"><img src="own.png.jpg" alt="Clickable Image" width="50"></a>
+
+    </nav>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="form-container">
+            <form id="userForm" aria-labelledby="form-title">
+                <h2 id="form-title">Report an Issue</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" required aria-describedby="username-error">
+                        <div class="error-message" id="username-error">Please enter a valid username</div>
+                    </div>
+                    <div class="form-group">
+  <label for="phone">Contact Number</label>
+  <input type="tel" id="phone" name="phone" placeholder="Enter up to 15-digit number" required pattern="^\d{7,15}$"maxlength="15"/>
+  
+</div>
+
+                    <div class="form-group">
+                        <label for="issue">Issue Description</label>
+                        <input type="text" id="issue" name="issue" placeholder="Describe your issue" required aria-describedby="issue-error">
+                        <div class="error-message" id="issue-error">Please describe the issue</div>
+                    </div>
+                    <button type="button" class="delete-btn" aria-label="Delete this row" disabled>Delete</button>
+                </div>
+                <button type="submit" id="submit-btn"></button>
+            </form>
+        </div>
+    </main>
+
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <h3>Confirm Submission</h3>
+            <p>Are you sure you want to submit all issues?</p>
+            <div class="modal-buttons">
+                <button id="confirmSubmit">Yes, Submit</button>
+                <button id="cancelSubmit">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+    <script>
+        const form = document.getElementById('userForm');
+        const submitBtn = document.getElementById('submit-btn');
+        const confirmModal = document.getElementById('confirmModal');
+        const confirmSubmit = document.getElementById('confirmSubmit');
+        const cancelSubmit = document.getElementById('cancelSubmit');
+        const yearSpan = document.getElementById('year');
+        yearSpan.textContent = new Date().getFullYear();
+
+        function validateInput(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            if (!input.value.trim()) {
+                input.classList.add('error');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('error');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        function validatePhone(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(input.value)) {
+                input.classList.add('error');
+                errorElement.style.display = 'block';
+                return false;
+            } else {
+                input.classList.remove('error');
+                errorElement.style.display = 'none';
+                return true;
+            }
+        }
+
+        function updateDeleteButtons() {
+            const deleteButtons = form.querySelectorAll('.delete-btn');
+            const rows = form.querySelectorAll('.form-row');
+            deleteButtons.forEach(button => {
+                button.disabled = rows.length === 1;
+            });
+        }
+
+        function addInputListeners(row) {
+            const inputs = row.querySelectorAll('input');
+            const deleteBtn = row.querySelector('.delete-btn');
+
+            inputs.forEach((input, index) => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        } else {
+                            addNewRow();
+                        }
+                    }
+                });
+
+                input.addEventListener('input', () => {
+                    if (input.id.includes('phone')) {
+                        input.value = input.value.replace(/[^0-9]/g, '');
+                        validatePhone(input);
+                    } else {
+                        validateInput(input);
+                    }
+                });
+            });
+
+            deleteBtn.addEventListener('click', () => {
+                row.remove();
+                updateDeleteButtons();
+            });
+        }
+
+        function addNewRow() {
+            const inputs = form.querySelectorAll('.form-row:last-child input');
+            const allValid = Array.from(inputs).every(input => 
+                input.id.includes('phone') ? validatePhone(input) : validateInput(input)
+            );
+
+            if (!allValid) {
+                alert('Please fill all fields correctly before adding a new row.');
+                return;
+            }
+
+            const timestamp = Date.now();
+            const newRow = document.createElement('div');
+            newRow.className = 'form-row';
+            newRow.innerHTML = `
+                <div class="form-group">
+                    <label for="username-${timestamp}">Username</label>
+                    <input type="text" id="username-${timestamp}" name="username" placeholder="Enter username" required aria-describedby="username-${timestamp}-error">
+                    <div class="error-message" id="username-${timestamp}-error">Please enter a valid username</div>
+                </div>
+                <div class="form-group">
+                    <label for="phone-${timestamp}">Contact Number</label>
+                    <input type="tel" id="phone-${timestamp}" name="phone" placeholder="Contact Number" required pattern="^\d{15}$" maxlength="15" aria-describedby="phone-${timestamp}-error">
+                    
+                </div>
+                <div class="form-group">
+                    <label for="issue-${timestamp}">Issue Description</label>
+                    <input type="text" id="issue-${timestamp}" name="issue" placeholder="Describe your issue" required aria-describedby="issue-${timestamp}-error">
+                    <div class="error-message" id="issue-${timestamp}-error">Please describe the issue</div>
+                </div>
+                <button type="button" class="delete-btn" aria-label="Delete this row">Delete</button>
+            `;
+            form.insertBefore(newRow, submitBtn);
+            addInputListeners(newRow);
+            updateDeleteButtons();
+            newRow.querySelector('input').focus();
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const inputs = form.querySelectorAll('input');
+            const allValid = Array.from(inputs).every(input => 
+                input.id.includes('phone') ? validatePhone(input) : validateInput(input)
+            );
+
+            if (allValid) {
+                confirmModal.style.display = 'flex';
+            } else {
+                alert('Please correct the errors in the form.');
+            }
+        });
+
+        confirmSubmit.addEventListener('click', async () => {
+            submitBtn.disabled = true;
+            submitBtn.classList.add('loading');
+            submitBtn.textContent = 'Submitting...';
+
+            const formData = new FormData(form);
+            const data = [];
+            const rows = form.querySelectorAll('.form-row');
+            rows.forEach(() => {
+                data.push({
+                    username: formData.get('username'),
+                    phone: formData.get('phone'),
+                    issue: formData.get('issue')
+                });
+            });
+
+            try {
+                // Mock API call
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                console.log('Form submitted:', data);
+                alert('Issues submitted successfully!');
+                form.reset();
+                confirmModal.style.display = 'none';
+                // Reset to single row
+                const rows = form.querySelectorAll('.form-row');
+                rows.forEach((row, index) => {
+                    if (index > 0) row.remove();
+                });
+                updateDeleteButtons();
+            } catch (error) {
+                alert('Error submitting form. Please try again.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                submitBtn.textContent = 'Submit Issues';
+            }
+        });
+
+        cancelSubmit.addEventListener('click', () => {
+            confirmModal.style.display = 'none';
+        });
+
+        document.querySelectorAll('.form-row').forEach(addInputListeners);
+        updateDeleteButtons();
+    </script>
+</body>
+</html>
