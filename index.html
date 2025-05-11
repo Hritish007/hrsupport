@@ -13,57 +13,53 @@
             --error-color: #dc2626;
             --background-color: #f3f4f6;
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Inter', Arial, sans-serif;
             line-height: 1.6;
             color: #1f2937;
             background-color: var(--background-color);
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
         header {
             background-color: var(--secondary-color);
             padding: 1rem 0;
             margin-bottom: 2rem;
+            position: sticky; /* Keep header fixed at top */
+            top: 0;
+            z-index: 1000;
         }
-
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-             gap: 1rem;
+            gap: 1rem;
         }
-
-    .navbar-brand {
+        .navbar-brand {
             color: white;
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
         }
-
         .nav-links img {
             width: 40px;
             transition: transform 0.2s;
         }
-
-        /* Section styling */
+        .nav-links img:hover {
+            transform: scale(1.1);
+        }
         .section {
             background-color: #ffffff;
             padding: 20px;
@@ -75,14 +71,12 @@
             box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
             margin-bottom: 30px;
         }
-
         .section h2 {
             margin-bottom: 1.5rem;
             color: var(--secondary-color);
         }
-
         .note-card {
-             border-left: 5px solid #3498db;
+            border-left: 5px solid #3498db;
             border-right: 5px solid #3498db;
             border-top: 1px solid #3498db;
             border-bottom: 1px solid #3498db;
@@ -93,32 +87,25 @@
             position: relative;
             border-left: 4px solid var(--primary-color);
         }
-
         .note-card.edited {
             border-left-color: var(--success-color);
             opacity: 0.8;
         }
-
         .note-card.editing .note-content {
             display: none;
         }
-
         .note-card.editing .edit-form {
             display: block;
         }
-
         .note-card .note-content {
             margin-bottom: 0.5rem;
         }
-
         .note-card .note-content p {
             margin-bottom: 0.5rem;
         }
-
         .note-card .edit-form {
             display: none;
         }
-
         .note-card .edit-form textarea {
             width: 100%;
             padding: 0.75rem;
@@ -128,19 +115,16 @@
             resize: vertical;
             transition: border-color 0.2s;
         }
-
         .note-card .edit-form textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-
         .note-card .actions {
             display: flex;
             gap: 0.5rem;
             margin-top: 0.5rem;
         }
-
         .note-card button {
             padding: 0.5rem 1rem;
             border: none;
@@ -150,30 +134,24 @@
             transition: background-color 0.2s;
             position: relative;
         }
-
         .note-card .reset-btn {
             background-color: #f59e0b;
             color: white;
         }
-
         .note-card .reset-btn:hover {
             background-color: #d97706;
         }
-
         .note-card .copy-btn {
             background-color: var(--primary-color);
             color: white;
         }
-
         .note-card .copy-btn:hover:not(:disabled) {
             background-color: #1d4ed8;
         }
-
         .note-card .copy-btn:disabled {
             background-color: #9ca3af;
             cursor: not-allowed;
         }
-
         .note-card .copy-btn.copied::after {
             content: 'Copied!';
             position: absolute;
@@ -188,27 +166,22 @@
             opacity: 1;
             transition: opacity 0.3s;
         }
-
         .note-card .copy-btn.copied {
             background-color: var(--success-color);
         }
-
         .add-note-form {
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid #e5e7eb;
         }
-
         .form-group {
             margin-bottom: 1rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 500;
         }
-
         .form-group textarea {
             width: 100%;
             padding: 0.75rem;
@@ -218,13 +191,11 @@
             resize: vertical;
             transition: border-color 0.2s;
         }
-
         .form-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-
         .submit-btn {
             background-color: var(--primary-color);
             color: white;
@@ -235,11 +206,9 @@
             font-size: 1rem;
             transition: background-color 0.2s;
         }
-
         .submit-btn:hover {
             background-color: #1d4ed8;
         }
-
         .footer {
             text-align: center;
             padding: 1rem 0;
@@ -247,27 +216,22 @@
             color: white;
             width: 100%;
         }
-
         .error-message {
             color: var(--error-color);
             font-size: 0.875rem;
             margin-top: 0.25rem;
             display: none;
         }
-
         @media (max-width: 768px) {
             .nav-links img {
                 width: 30px;
             }
-
             .note-card {
                 padding: 0.75rem;
             }
-
             .note-card .actions {
                 flex-direction: column;
             }
-
             .note-card button {
                 width: 100%;
             }
@@ -275,24 +239,23 @@
     </style>
 </head>
 <body>
-   <header>
+    <header>
         <nav class="navbar container">
             <a href="#" class="navbar-brand">HR Support</a>
-           <nav class="navbar">
-        <a href="Router.html"><img src="router.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="Account.html"><img src="account.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="index.html"><img src="slow.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="TV.html"><img src="iptv.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="myworldlink.html"><img src="myworldlink.png.jpg" alt="Clickable Image" width="50"></a>
-        <a href="Ownpin.html"><img src="own.png.jpg" alt="Clickable Image" width="50"></a>
-
-    </nav>
+            <div class="nav-links">
+                <a href="Router.html" data-page="Router.html"><img src="router.png.jpg" alt="Router" width="50"></a>
+                <a href="Account.html" data-page="Account.html"><img src="account.png.jpg" alt="Account" width="50"></a>
+                <a href="Slow.html" data-page="Slow.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
+                <a href="TV.html" data-page="TV.html"><img src="iptv.png.jpg" alt="TV" width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="MyWorldLink" width="50"></a>
+                <a href="Ownpin.html" data-page="Ownpin.html"><img src="own.png.jpg" alt="OwnPin" width="50"></a>
+            </div>
         </nav>
     </header>
 
-    <main class="container">
+    <main class="container" id="main-content">
         <section class="section" aria-labelledby="slow">
-            <h2>Slow </h2>
+            <h2>Slow</h2>
             <div id="notes-container">
                 <h4>Speed test fine</h4>
                 <div class="note-card" data-id="1" data-original-text="Bandwidth verified, R.X. power checked, device verified, ping test fine, speed test done, domain ping fine, issue resolved.">
@@ -307,9 +270,8 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-
                 <h4>High Latency in a single device with good RSSI</h4>
-                <div class="note-card" data-id="1" data-original-text="Bandwidth fine, R.X. power fine, OLT RX difference <5 verified, device verified, range fine (<= -65dBm), initial ping not fine, another device ping fine, reconnected Wi-Fi on first device, issue solved.">
+                <div class="note-card" data-id="2" data-original-text="Bandwidth fine, R.X. power fine, OLT RX difference <5 verified, device verified, range fine (<= -65dBm), initial ping not fine, another device ping fine, reconnected Wi-Fi on first device, issue solved.">
                     <div class="note-content">
                         <p>Bandwidth fine, R.X. power fine, OLT RX difference <5 verified, device verified, range fine (<= -65dBm), initial ping not fine, another device ping fine, reconnected Wi-Fi on first device, issue solved.</p>
                     </div>
@@ -321,11 +283,10 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-                
                 <h4>High Latency in a single device with good RSSI</h4><strong>(Interference not Seen)</strong>
-                <div class="note-card" data-id="1" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm),another device ping not fine, channel interference not seen, reconnected WiFi, issue solved.">
+                <div class="note-card" data-id="3" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference not seen, reconnected WiFi, issue solved.">
                     <div class="note-content">
-                        <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm),another device ping not fine, channel interference not seen, reconnected WiFi, issue solved.</p>
+                        <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference not seen, reconnected WiFi, issue solved.</p>
                     </div>
                     <form class="edit-form">
                         <textarea rows="1" aria-label="Edit note text"></textarea>
@@ -335,9 +296,8 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-                
                 <h4>Interference Seen (For Single Band ONU)</h4>
-                <div class="note-card" data-id="1" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference seen, suggested solutions for interference (suggested dual band ONU), refreshed channel and verified, issue solved.">
+                <div class="note-card" data-id="4" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference seen, suggested solutions for interference (suggested dual band ONU), refreshed channel and verified, issue solved.">
                     <div class="note-content">
                         <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device checked, initial ping not fine, range fine (<= -65dBm), another device ping not fine, channel interference seen, suggested solutions for interference (suggested dual band ONU), refreshed channel and verified, issue solved.</p>
                     </div>
@@ -349,9 +309,8 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-
                 <h4>Interference Seen (For Dual Band ONU)</h4>
-                <div class="note-card" data-id="1" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, range fine (<= -65dBm), initial ping not fine, another device ping not fine, channel interference seen, refreshed channel, issue solved.">
+                <div class="note-card" data-id="5" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, range fine (<= -65dBm), initial ping not fine, another device ping not fine, channel interference seen, refreshed channel, issue solved.">
                     <div class="note-content">
                         <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, range fine (<= -65dBm), initial ping not fine, another device ping not fine, channel interference seen, refreshed channel, issue solved.</p>
                     </div>
@@ -363,11 +322,10 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-
                 <h4>Range Issues</h4>
-                <div class="note-card" data-id="1" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, initial ping not fine, range not fine (<= -65dBm), suggest secondary ONU and also suggest reposition ">
+                <div class="note-card" data-id="6" data-original-text="Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, initial ping not fine, range not fine (<= -65dBm), suggest secondary ONU and also suggest reposition">
                     <div class="note-content">
-                        <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, initial ping not fine, range not fine (<= -65dBm), suggest secondary ONU and also suggest reposition  </p>
+                        <p>Bandwidth verified, R.X. power checked, OLT RX difference <5, device verified, initial ping not fine, range not fine (<= -65dBm), suggest secondary ONU and also suggest reposition</p>
                     </div>
                     <form class="edit-form">
                         <textarea rows="2" aria-label="Edit note text"></textarea>
@@ -377,8 +335,15 @@
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
-
-            
+            </div>
+            <form id="addNoteForm" class="add-note-form">
+                <div class="form-group">
+                    <label for="newNote">Add New Note</label>
+                    <textarea id="newNote" rows="4" placeholder="This is the temporary Note" aria-label="New note text"></textarea>
+                    <div id="newNote-error" class="error-message"></div>
+                </div>
+                <button type="submit" class="submit-btn">Add Note</button>
+            </form>
         </section>
     </main>
 
@@ -387,21 +352,41 @@
     </footer>
 
     <script>
-        const notesContainer = document.getElementById('notes-container');
-        const addNoteForm = document.getElementById('addNoteForm');
-        const newNoteInput = document.getElementById('newNote');
-        const yearSpan = document.getElementById('year');
-        let noteIdCounter = 6; // Start after initial notes
+        // State management
+        let appState = {
+            notes: {}, // Store notes by page and ID
+            noteIdCounter: 7 // Start after initial notes
+        };
+
+        // Load state from localStorage
+        function loadState() {
+            const savedState = localStorage.getItem('hrSupportState');
+            if (savedState) {
+                appState = JSON.parse(savedState);
+            }
+        }
+
+        // Save state to localStorage
+        function saveState() {
+            localStorage.setItem('hrSupportState', JSON.stringify(appState));
+        }
+
+        // Initialize state
+        loadState();
 
         // Update year
-        yearSpan.textContent = new Date().getFullYear();
+        document.getElementById('year').textContent = new Date().getFullYear();
 
         // Validate note input
         function validateNoteInput(input) {
-            const errorElement = document.getElementById(`${input.id}-error`);
+            const errorElement = document.getElementById(`${input.id}-error`) || document.createElement('div');
+            errorElement.className = 'error-message';
+            errorElement.id = `${input.id}-error`;
             if (!input.value.trim()) {
                 input.classList.add('error');
                 errorElement.style.display = 'block';
+                errorElement.textContent = 'Note cannot be empty.';
+                if (!input.nextElementSibling) input.parentNode.appendChild(errorElement);
                 return false;
             } else {
                 input.classList.remove('error');
@@ -410,7 +395,7 @@
             }
         }
 
-        // Fallback copy function using document.execCommand
+        // Fallback copy function
         function fallbackCopyText(text) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
@@ -430,14 +415,14 @@
         }
 
         // Add event listeners to note cards
-        function addNoteListeners(noteCard) {
+        function addNoteListeners(noteCard, pageName) {
             const editBtn = noteCard.querySelector('.edit-btn');
             const copyBtn = noteCard.querySelector('.copy-btn');
             const editForm = noteCard.querySelector('.edit-form');
             const textarea = editForm.querySelector('textarea');
             const noteContent = noteCard.querySelector('.note-content');
 
-            // Initialize textarea with current note text
+            // Initialize textarea
             const currentText = Array.from(noteContent.querySelectorAll('p'))
                 .map(p => p.textContent.trim())
                 .filter(text => text)
@@ -452,7 +437,6 @@
                         alert('Note cannot be empty.');
                         return;
                     }
-                    // Update note content
                     noteContent.innerHTML = newText.split('\n')
                         .map(line => `<p>${line}</p>`)
                         .join('');
@@ -461,9 +445,14 @@
                     editBtn.textContent = 'Reset';
                     editBtn.classList.remove('save-btn');
                     editBtn.classList.add('reset-btn');
-                    copyBtn.disabled = false; // Enable copy button
+                    copyBtn.disabled = false;
+
+                    // Save to appState
+                    appState.notes[pageName] = appState.notes[pageName] || {};
+                    appState.notes[pageName][noteCard.dataset.id] = newText;
+                    saveState();
                 } else if (noteCard.classList.contains('edited')) {
-                    // Reset to original text
+                    // Reset to original
                     const originalText = noteCard.dataset.originalText;
                     noteContent.innerHTML = originalText.split('\n')
                         .map(line => `<p>${line}</p>`)
@@ -473,7 +462,16 @@
                     editBtn.textContent = 'Edit';
                     editBtn.classList.remove('reset-btn');
                     editBtn.classList.add('edit-btn');
-                    copyBtn.disabled = false; // Enable="/" copy button
+                    copyBtn.disabled = false;
+
+                    // Remove from appState
+                    if (appState.notes[pageName]) {
+                        delete appState.notes[pageName][noteCard.dataset.id];
+                        if (Object.keys(appState.notes[pageName]).length === 0) {
+                            delete appState.notes[pageName];
+                        }
+                        saveState();
+                    }
                 } else {
                     // Enter edit mode
                     noteCard.classList.add('editing');
@@ -481,7 +479,7 @@
                     editBtn.classList.remove('edit-btn');
                     editBtn.classList.add('save-btn');
                     textarea.focus();
-                    copyBtn.disabled = true; // Disable copy button
+                    copyBtn.disabled = true;
                 }
             });
 
@@ -490,25 +488,19 @@
                     .map(p => p.textContent.trim())
                     .filter(text => text)
                     .join('\n');
-
                 if (!noteText) {
                     alert('No text to copy in this note.');
                     return;
                 }
-
                 if (navigator.clipboard && window.isSecureContext) {
                     navigator.clipboard.writeText(noteText).then(() => {
                         copyBtn.classList.add('copied');
-                        setTimeout(() => {
-                            copyBtn.classList.remove('copied');
-                        }, 2000);
+                        setTimeout(() => copyBtn.classList.remove('copied'), 2000);
                     }).catch(err => {
                         console.warn('Clipboard API failed:', err);
                         if (fallbackCopyText(noteText)) {
                             copyBtn.classList.add('copied');
-                            setTimeout(() => {
-                                copyBtn.classList.remove('copied');
-                            }, 2000);
+                            setTimeout(() => copyBtn.classList.remove('copied'), 2000);
                         } else {
                             alert('Failed to copy note. Please select and copy manually.');
                         }
@@ -516,9 +508,7 @@
                 } else {
                     if (fallbackCopyText(noteText)) {
                         copyBtn.classList.add('copied');
-                        setTimeout(() => {
-                            copyBtn.classList.remove('copied');
-                        }, 2000);
+                        setTimeout(() => copyBtn.classList.remove('copied'), 2000);
                     } else {
                         alert('Failed to copy note. Please select and copy manually.');
                     }
@@ -527,9 +517,76 @@
         }
 
         // Initialize existing notes
-        document.querySelectorAll('.note-card').forEach(addNoteListeners);
+        function initializeNotes(pageName) {
+            document.querySelectorAll('.note-card').forEach(noteCard => {
+                addNoteListeners(noteCard, pageName);
+                // Apply saved edits
+                if (appState.notes[pageName] && appState.notes[pageName][noteCard.dataset.id]) {
+                    const savedText = appState.notes[pageName][noteCard.dataset.id];
+                    noteCard.querySelector('.note-content').innerHTML = savedText.split('\n')
+                        .map(line => `<p>${line}</p>`)
+                        .join('');
+                    noteCard.querySelector('.edit-form textarea').value = savedText;
+                    noteCard.classList.add('edited');
+                    noteCard.querySelector('.edit-btn').textContent = 'Reset';
+                    noteCard.querySelector('.edit-btn').classList.remove('edit-btn');
+                    noteCard.querySelector('.edit-btn').classList.add('reset-btn');
+                }
+            });
+        }
+
+        // Load content dynamically
+        async function loadPage(page, pushState = true) {
+            try {
+                const response = await fetch(page);
+                if (!response.ok) throw new Error('Page not found');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newMain = doc.querySelector('main');
+                if (!newMain) throw new Error('Main content not found in page');
+
+                // Update main content
+                const mainContent = document.getElementById('main-content');
+                mainContent.innerHTML = newMain.innerHTML;
+
+                // Initialize notes for new page
+                const pageName = page.split('.')[0];
+                initializeNotes(pageName);
+
+                // Update document title
+                document.title = doc.querySelector('title')?.textContent || 'HR Support';
+
+                // Update URL
+                if (pushState) {
+                    history.pushState({ page }, '', page);
+                }
+            } catch (err) {
+                console.error('Error loading page:', err);
+                document.getElementById('main-content').innerHTML = '<p>Error loading content. Please try again.</p>';
+            }
+        }
+
+        // Attach navigation listeners
+        function attachNavListeners() {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    loadPage(page);
+                });
+            });
+        }
+
+        // Handle back/forward navigation
+        window.addEventListener('popstate', (e) => {
+            const page = e.state?.page || 'Slow.html';
+            loadPage(page, false);
+        });
 
         // Handle new note submission
+        const addNoteForm = document.getElementById('addNoteForm');
+        const newNoteInput = document.getElementById('newNote');
         addNoteForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (!validateNoteInput(newNoteInput)) {
@@ -538,9 +595,10 @@
             }
 
             const noteText = newNoteInput.value.trim();
+            const pageName = location.pathname.split('/').pop().split('.')[0] || 'Slow';
             const noteCard = document.createElement('div');
             noteCard.className = 'note-card';
-            noteCard.dataset.id = noteIdCounter++;
+            noteCard.dataset.id = appState.noteIdCounter++;
             noteCard.dataset.originalText = noteText;
             noteCard.innerHTML = `
                 <div class="note-content">
@@ -554,14 +612,24 @@
                     <button class="copy-btn" aria-label="Copy note text">Copy</button>
                 </div>
             `;
-            notesContainer.appendChild(noteCard);
-            addNoteListeners(noteCard);
+            document.getElementById('notes-container').appendChild(noteCard);
+            addNoteListeners(noteCard, pageName);
+
+            // Save new note
+            appState.notes[pageName] = appState.notes[pageName] || {};
+            appState.notes[pageName][noteCard.dataset.id] = noteText;
+            saveState();
+
             addNoteForm.reset();
             newNoteInput.focus();
         });
 
         // Input validation on change
         newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
+
+        // Initial setup
+        initializeNotes('Slow');
+        attachNavListeners();
     </script>
 </body>
 </html>
