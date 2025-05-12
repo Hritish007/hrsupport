@@ -245,7 +245,7 @@
             <div class="nav-links">
                 <a href="Router.html" data-page="Router.html"><img src="router.png.jpg" alt="Router" width="50"></a>
                 <a href="Account.html" data-page="Account.html"><img src="account.png.jpg" alt="Account" width="50"></a>
-                <a href="index.html" data-page="Slow.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
+                <a href="index.html" data-page="index.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
                 <a href="TV.html" data-page="TV.html"><img src="iptv.png.jpg" alt="TV" width="50"></a>
                 <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="MyWorldLink" width="50"></a>
                 <a href="Ownpin.html" data-page="Ownpin.html"><img src="own.png.jpg" alt="OwnPin" width="50"></a>
@@ -254,7 +254,7 @@
     </header>
 
        <main class="container" id="main-content">
-        <section class="section" aria-labelledby="slow">
+        <section class="section" aria-labelledby="index">
             <h2>Slow</h2>
             <div id="notes-container">
                 <h4>Speed test fine</h4>
@@ -580,7 +580,7 @@
 
         // Handle back/forward navigation
         window.addEventListener('popstate', (e) => {
-            const page = e.state?.page || 'Slow.html';
+            const page = e.state?.page || 'index.html';
             loadPage(page, false);
         });
 
@@ -595,7 +595,7 @@
             }
 
             const noteText = newNoteInput.value.trim();
-            const pageName = location.pathname.split('/').pop().split('.')[0] || 'Slow';
+            const pageName = location.pathname.split('/').pop().split('.')[0] || 'index';
             const noteCard = document.createElement('div');
             noteCard.className = 'note-card';
             noteCard.dataset.id = appState.noteIdCounter++;
@@ -628,7 +628,7 @@
         newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
 
         // Initial setup
-        initializeNotes('Slow');
+        initializeNotes('index');
         attachNavListeners();
     </script>
 </body>
