@@ -728,7 +728,7 @@
 
         // Handle back/forward navigation
         window.addEventListener('popstate', (e) => {
-            const page = e.state?.page || 'Slow.html';
+            const page = e.state?.page || 'TV.html';
             loadPage(page, false);
         });
 
@@ -743,7 +743,7 @@
             }
 
             const noteText = newNoteInput.value.trim();
-            const pageName = location.pathname.split('/').pop().split('.')[0] || 'Slow';
+            const pageName = location.pathname.split('/').pop().split('.')[0] || 'TV';
             const noteCard = document.createElement('div');
             noteCard.className = 'note-card';
             noteCard.dataset.id = appState.noteIdCounter++;
@@ -776,7 +776,7 @@
         newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
 
         // Initial setup
-        initializeNotes('Slow');
+        initializeNotes('TV');
         attachNavListeners();
     </script>
 </body>
