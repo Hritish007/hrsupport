@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR Support</title>
+    <title>HR Support - TV</title>
     <link rel="icon" type="image/png" href="hrk.png.jpg">
-    <style>
+        <style>
         :root {
             --primary-color: #2563eb;
             --secondary-color: #1f2937;
@@ -33,7 +33,7 @@
             background-color: var(--secondary-color);
             padding: 1rem 0;
             margin-bottom: 2rem;
-            position: sticky; /* Keep header fixed at top */
+            position: sticky;
             top: 0;
             z-index: 1000;
         }
@@ -87,10 +87,6 @@
             position: relative;
             border-left: 4px solid var(--primary-color);
         }
-        .note-card.edited {
-            border-left-color: var(--success-color);
-            opacity: 0.8;
-        }
         .note-card.editing .note-content {
             display: none;
         }
@@ -120,11 +116,12 @@
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
         }
-        .note-card .actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
+          .note-card .actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    justify-content: flex-end; 
+}
         .note-card button {
             padding: 0.5rem 1rem;
             border: none;
@@ -134,23 +131,9 @@
             transition: background-color 0.2s;
             position: relative;
         }
-        .note-card .reset-btn {
-            background-color: #f59e0b;
-            color: white;
-        }
-        .note-card .reset-btn:hover {
-            background-color: #d97706;
-        }
         .note-card .copy-btn {
             background-color: var(--primary-color);
             color: white;
-        }
-        .note-card .copy-btn:hover:not(:disabled) {
-            background-color: #1d4ed8;
-        }
-        .note-card .copy-btn:disabled {
-            background-color: #9ca3af;
-            cursor: not-allowed;
         }
         .note-card .copy-btn.copied::after {
             content: 'Copied!';
@@ -167,47 +150,7 @@
             transition: opacity 0.3s;
         }
         .note-card .copy-btn.copied {
-            background-color: var(--success-color);
-        }
-        .add-note-form {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-size: 1rem;
-            resize: vertical;
-            transition: border-color 0.2s;
-        }
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s;
-        }
-        .submit-btn:hover {
-            background-color: #1d4ed8;
+            background-color: var(--secondary-color);
         }
         .footer {
             text-align: center;
@@ -216,44 +159,30 @@
             color: white;
             width: 100%;
         }
-        .error-message {
-            color: var(--error-color);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-            display: none;
-        }
         @media (max-width: 768px) {
-            .nav-links img {
-                width: 30px;
-            }
-            .note-card {
-                padding: 0.75rem;
-            }
-            .note-card .actions {
-                flex-direction: column;
-            }
-            .note-card button {
-                width: 100%;
-            }
-        }
+    .note-card .actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
     </style>
+
 </head>
 <body>
     <header>
         <nav class="navbar container">
             <a href="#" class="navbar-brand">HR Support</a>
-            <div class="nav-links">
+             <div class="nav-links">
                 <a href="Router.html" data-page="Router.html"><img src="router.png.jpg" alt="Router" width="50"></a>
                 <a href="Account.html" data-page="Account.html"><img src="account.png.jpg" alt="Account" width="50"></a>
-                <a href="index.html" data-page="index.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
+                <a href="Slow.html" data-page="Slow.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
                 <a href="TV.html" data-page="TV.html"><img src="iptv.png.jpg" alt="TV" width="50"></a>
                 <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="MyWorldLink" width="50"></a>
-                <a href="Ownpin.html" data-page="Ownpin.html"><img src="own.png.jpg" alt="OwnPin" width="50"></a>
+                <a href="index.html" data-page="index.html"><img src="own.png.jpg" alt="OwnPin" width="50Iron" width="50"></a>
             </div>
         </nav>
     </header>
-
-    <main class="container" id="main-content">
+<main class="container" id="main-content">
         <section class="section" aria-labelledby="iptv">
             <h2 id="iptv">IPTV</h2>
             <div id="notes-container">
@@ -346,8 +275,8 @@
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
                         <button class="copy-btn" aria-label="Copy note text">Copy</button>
-                    </divPunish
-                    <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                    </div>
+                    <button class="cpy-btn" aria-label="Copy note text">Copy</button>
                     </div>
                 </div>
                 <div class="note-card" data-id="8" data-original-text="Query About Netflix Services: Checked if client has Stream Z+ STB box. Updated STB box to include Netflix feature. Informed client they need their own Netflix subscription.">
@@ -364,14 +293,7 @@
                     </div>
                 </div>
             </div>
-            <form id="addNoteForm" class="add-note-form">
-                <div class="form-group">
-                    <label for="newNote">Add New Note</label>
-                    <textarea id="newNote" rows="4" aria-label="New note text"></textarea>
-                    <div id="newNote-error" class="error-message"></div>
-                </div>
-                <button type="submit" class="submit-btn">Add Note</button>
-            </form>
+
         </section>
     </main>
 
@@ -379,49 +301,9 @@
         © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
     </footer>
 
-    <script>
-        // State management
-        let appState = {
-            notes: {}, // Store notes by page and ID
-            noteIdCounter: 7 // Start after initial notes
-        };
-
-        // Load state from localStorage
-        function loadState() {
-            const savedState = localStorage.getItem('hrSupportState');
-            if (savedState) {
-                appState = JSON.parse(savedState);
-            }
-        }
-
-        // Save state to localStorage
-        function saveState() {
-            localStorage.setItem('hrSupportState', JSON.stringify(appState));
-        }
-
-        // Initialize state
-        loadState();
-
+   <script>
         // Update year
         document.getElementById('year').textContent = new Date().getFullYear();
-
-        // Validate note input
-        function validateNoteInput(input) {
-            const errorElement = document.getElementById(`${input.id}-error`) || document.createElement('div');
-            errorElement.className = 'error-message';
-            errorElement.id = `${input.id}-error`;
-            if (!input.value.trim()) {
-                input.classList.add('error');
-                errorElement.style.display = 'block';
-                errorElement.textContent = 'Note cannot be empty.';
-                if (!input.nextElementSibling) input.parentNode.appendChild(errorElement);
-                return false;
-            } else {
-                input.classList.remove('error');
-                errorElement.style.display = 'none';
-                return true;
-            }
-        }
 
         // Fallback copy function
         function fallbackCopyText(text) {
@@ -443,7 +325,7 @@
         }
 
         // Add event listeners to note cards
-        function addNoteListeners(noteCard, pageName) {
+        function addNoteListeners(noteCard) {
             const editBtn = noteCard.querySelector('.edit-btn');
             const copyBtn = noteCard.querySelector('.copy-btn');
             const editForm = noteCard.querySelector('.edit-form');
@@ -459,55 +341,18 @@
 
             editBtn.addEventListener('click', () => {
                 if (noteCard.classList.contains('editing')) {
-                    // Save changes
-                    const newText = textarea.value.trim();
-                    if (!newText) {
-                        alert('Note cannot be empty.');
-                        return;
-                    }
-                    noteContent.innerHTML = newText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
+                    // Exit edit mode without saving
                     noteCard.classList.remove('editing');
-                    noteCard.classList.add('edited');
-                    editBtn.textContent = 'Reset';
-                    editBtn.classList.remove('save-btn');
-                    editBtn.classList.add('reset-btn');
-                    copyBtn.disabled = false;
-
-                    // Save to appState
-                    appState.notes[pageName] = appState.notes[pageName] || {};
-                    appState.notes[pageName][noteCard.dataset.id] = newText;
-                    saveState();
-                } else if (noteCard.classList.contains('edited')) {
-                    // Reset to original
-                    const originalText = noteCard.dataset.originalText;
-                    noteContent.innerHTML = originalText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
-                    textarea.value = originalText;
-                    noteCard.classList.remove('edited');
                     editBtn.textContent = 'Edit';
-                    editBtn.classList.remove('reset-btn');
-                    editBtn.classList.add('edit-btn');
-                    copyBtn.disabled = false;
-
-                    // Remove from appState
-                    if (appState.notes[pageName]) {
-                        delete appState.notes[pageName][noteCard.dataset.id];
-                        if (Object.keys(appState.notes[pageName]).length === 0) {
-                            delete appState.notes[pageName];
-                        }
-                        saveState();
-                    }
+                 
+                    // Reset textarea to original text
+                    textarea.value = currentText;
                 } else {
                     // Enter edit mode
                     noteCard.classList.add('editing');
-                    editBtn.textContent = 'Save';
-                    editBtn.classList.remove('edit-btn');
-                    editBtn.classList.add('save-btn');
+                    editBtn.textContent = 'Reset';
                     textarea.focus();
-                    copyBtn.disabled = true;
+                
                 }
             });
 
@@ -545,21 +390,9 @@
         }
 
         // Initialize existing notes
-        function initializeNotes(pageName) {
+        function initializeNotes() {
             document.querySelectorAll('.note-card').forEach(noteCard => {
-                addNoteListeners(noteCard, pageName);
-                // Apply saved edits
-                if (appState.notes[pageName] && appState.notes[pageName][noteCard.dataset.id]) {
-                    const savedText = appState.notes[pageName][noteCard.dataset.id];
-                    noteCard.querySelector('.note-content').innerHTML = savedText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
-                    noteCard.querySelector('.edit-form textarea').value = savedText;
-                    noteCard.classList.add('edited');
-                    noteCard.querySelector('.edit-btn').textContent = 'Reset';
-                    noteCard.querySelector('.edit-btn').classList.remove('edit-btn');
-                    noteCard.querySelector('.edit-btn').classList.add('reset-btn');
-                }
+                addNoteListeners(noteCard);
             });
         }
 
@@ -579,8 +412,7 @@
                 mainContent.innerHTML = newMain.innerHTML;
 
                 // Initialize notes for new page
-                const pageName = page.split('.')[0];
-                initializeNotes(pageName);
+                initializeNotes();
 
                 // Update document title
                 document.title = doc.querySelector('title')?.textContent || 'HR Support';
@@ -608,55 +440,12 @@
 
         // Handle back/forward navigation
         window.addEventListener('popstate', (e) => {
-            const page = e.state?.page || 'TV.html';
+            const page = e.state?.page || 'Router.html';
             loadPage(page, false);
         });
 
-        // Handle new note submission
-        const addNoteForm = document.getElementById('addNoteForm');
-        const newNoteInput = document.getElementById('newNote');
-        addNoteForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (!validateNoteInput(newNoteInput)) {
-                alert('Please enter a valid note.');
-                return;
-            }
-
-            const noteText = newNoteInput.value.trim();
-            const pageName = location.pathname.split('/').pop().split('.')[0] || 'TV';
-            const noteCard = document.createElement('div');
-            noteCard.className = 'note-card';
-            noteCard.dataset.id = appState.noteIdCounter++;
-            noteCard.dataset.originalText = noteText;
-            noteCard.innerHTML = `
-                <div class="note-content">
-                    <p>${noteText}</p>
-                </div>
-                <form class="edit-form">
-                    <textarea rows="4" aria-label="Edit note text">${noteText}</textarea>
-                </form>
-                <div class="actions">
-                    <button class="edit-btn" aria-label="Edit note">Edit</button>
-                    <button class="copy-btn" aria-label="Copy note text">Copy</button>
-                </div>
-            `;
-            document.getElementById('notes-container').appendChild(noteCard);
-            addNoteListeners(noteCard, pageName);
-
-            // Save new note
-            appState.notes[pageName] = appState.notes[pageName] || {};
-            appState.notes[pageName][noteCard.dataset.id] = noteText;
-            saveState();
-
-            addNoteForm.reset();
-            newNoteInput.focus();
-        });
-
-        // Input validation on change
-        newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
-
         // Initial setup
-        initializeNotes('TV');
+        initializeNotes();
         attachNavListeners();
     </script>
 </body>
