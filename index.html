@@ -24,7 +24,7 @@
             font-family: 'Inter', Arial, sans-serif;
             line-height: 1.6;
             color: #1f2937;
-            background-color: #f3f4f6;
+            background-color: #1f2937;
         }
 
         .container {
@@ -312,7 +312,7 @@
 <body>
     <header>
         <nav class="navbar container">
-            <a href="#" class="navbar-brand">HR Support</a>
+            <a href="#" class="navbar-brand" onclick="showNotification()">HR Support</a>
             <div class="nav-links">
                 <a href="Router.html" data-page="Router.html"><img src="router.png.jpg" alt="Router" width="50"></a>
                 <a href="Account.html" data-page="Account.html"><img src="account.png.jpg" alt="Account" width="50"></a>
@@ -355,7 +355,7 @@
     </main>
 
     <main class="container">
-        <div class="note-container">
+        <section class="note-container">
             <h2 id="note">Note</h2>
             <form id="NoteForm">
                 <div class="form-note">
@@ -365,15 +365,18 @@
                 <div class="reset-btn-container">
                     <button type="reset" onclick="return confirmReset()" class="reset-btn">Reset</button>
                 </div>
-            </form>
-        </div>
-    </main>
-
+            </form><br>
     <footer class="footer">
         © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
     </footer>
+        </section>
+    </main>
 
     <script>
+
+        function showNotification() {
+        alert("Welcome HR Support User!,\n        If you face any trouble while switching to 'Report an Issue,' please refresh the page. Your saved data is secure and will not be lost. Thank you for choosing HR Support!");
+    }
         const form = document.getElementById('userForm');
         const noteForm = document.getElementById('NoteForm');
         const noteText = document.getElementById('note-text');
@@ -581,13 +584,15 @@
         }
 
         // Initialize
-        document.getElementById('userForm').addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent unintended form submission
+        document.getElementById('userForm').addEventListener('', (e) => {
+            e.preventDefault(); // 
         });
         document.querySelectorAll('.form-row').forEach(addInputListeners);
         updateDeleteButtons();
         loadFormData();
         loadNoteData();
+        
     </script>
+    
 </body>
 </html>
