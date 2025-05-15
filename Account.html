@@ -9,9 +9,9 @@
         :root {
             --primary-color: #2563eb;
             --secondary-color: #1f2937;
+            --background-color: #1f2937;
             --success-color: #16a34a;
-            --error-color: #dc2626;
-            --background-color: #f3f4f6;
+            --warning-color: #d97706;
         }
         * {
             margin: 0;
@@ -63,10 +63,9 @@
         .section {
             background-color: #ffffff;
             padding: 20px;
+            border: 1px solid #3498db;
             border-left: 5px solid #3498db;
             border-right: 5px solid #3498db;
-            border-top: 1px solid #3498db;
-            border-bottom: 1px solid #3498db;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
             margin-bottom: 30px;
@@ -76,20 +75,13 @@
             color: var(--secondary-color);
         }
         .note-card {
-            border-left: 5px solid #3498db;
-            border-right: 5px solid #3498db;
-            border-top: 1px solid #3498db;
-            border-bottom: 1px solid #3498db;
             background: #f9fafb;
             padding: 1rem;
             border-radius: 6px;
             margin-bottom: 1rem;
-            position: relative;
+            border: 1px solid #3498db;
             border-left: 4px solid var(--primary-color);
-        }
-        .note-card.edited {
-            border-left-color: var(--success-color);
-            opacity: 0.8;
+            border-right: 5px solid #3498db;
         }
         .note-card.editing .note-content {
             display: none;
@@ -99,21 +91,31 @@
         }
         .note-card .note-content {
             margin-bottom: 0.5rem;
+            cursor: pointer;
         }
         .note-card .note-content p {
             margin-bottom: 0.5rem;
+            width: 100%;
         }
         .note-card .edit-form {
             display: none;
         }
         .note-card .edit-form textarea {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.5rem;
             border: 1px solid #d1d5db;
             border-radius: 4px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             resize: vertical;
             transition: border-color 0.2s;
+            position: relative;
+            cursor: pointer;
+            min-height: 60px;
+            max-height: 1000px;
+            line-height: none;
+        }
+        .note-card.editing .edit-form textarea {
+            cursor: text;
         }
         .note-card .edit-form textarea:focus {
             outline: none;
@@ -124,90 +126,31 @@
             display: flex;
             gap: 0.5rem;
             margin-top: 0.5rem;
+            justify-content: flex-end;
         }
         .note-card button {
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             transition: background-color 0.2s;
-            position: relative;
-        }
-        .note-card .reset-btn {
-            background-color: #f59e0b;
             color: white;
+            min-width: 65px;
         }
-        .note-card .reset-btn:hover {
-            background-color: #d97706;
-        }
-        .note-card .copy-btn {
+        .note-card button.edit-btn {
             background-color: var(--primary-color);
-            color: white;
         }
-        .note-card .copy-btn:hover:not(:disabled) {
-            background-color: #1d4ed8;
+        .note-card button.reset-btn {
+            background-color: red;
         }
-        .note-card .copy-btn:disabled {
-            background-color: #9ca3af;
+        .note-card button:disabled {
+            background-color: #6b7280;
             cursor: not-allowed;
+            opacity: 0.6;
         }
-        .note-card .copy-btn.copied::after {
-            content: 'Copied!';
-            position: absolute;
-            top: -2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--success-color);
-            color: white;
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            opacity: 1;
-            transition: opacity 0.3s;
-        }
-        .note-card .copy-btn.copied {
-            background-color: var(--success-color);
-        }
-        .add-note-form {
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #e5e7eb;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 4px;
-            font-size: 1rem;
-            resize: vertical;
-            transition: border-color 0.2s;
-        }
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        .submit-btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.2s;
-        }
-        .submit-btn:hover {
-            background-color: #1d4ed8;
+        .note-card button:hover:not(:disabled) {
+            opacity: 0.9;
         }
         .footer {
             text-align: center;
@@ -216,32 +159,36 @@
             color: white;
             width: 100%;
         }
-        .error-message {
-            color: var(--error-color);
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-            display: none;
+        .copy-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--success-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            z-index: 1001;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .copy-notification.show {
+            opacity: 1;
         }
         @media (max-width: 768px) {
-            .nav-links img {
-                width: 30px;
-            }
-            .note-card {
-                padding: 0.75rem;
-            }
             .note-card .actions {
                 flex-direction: column;
+                align-items: stretch;
             }
             .note-card button {
-                width: 100%;
+                min-width: 100%;
             }
         }
     </style>
-</head>
 <body>
     <header>
         <nav class="navbar container">
-            <a href="#" class="navbar-brand">HR Support</a>
+            <a href="#" class="navbar-brand" onclick="showNotification()">HR Support</a>
             <div class="nav-links">
                 <a href="Router.html" data-page="Router.html"><img src="router.png.jpg" alt="Router" width="50"></a>
                 <a href="Account.html" data-page="Account.html"><img src="account.png.jpg" alt="Account" width="50"></a>
@@ -262,11 +209,11 @@
                         <p>Account extended for 3 days. Suggested to use My WorldLink app and also suggested to pay.</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
                 <div class="note-card" data-id="2" data-original-text="As per client he paid his money through ESEWA but the payment is not received, suggested to contact with vender.">
@@ -274,11 +221,11 @@
                         <p>As per client he paid his money through ESEWA but the payment is not received, suggested to contact with vender.</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
                 <div class="note-card" data-id="3" data-original-text="As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly.">
@@ -286,11 +233,11 @@
                         <p>As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly.</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
                 <div class="note-card" data-id="4" data-original-text="Client want bonus while paying on the same package, please do needful.">
@@ -298,11 +245,11 @@
                         <p>Client want bonus while paying on the same package, please do needful.</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
                 <div class="note-card" data-id="5" data-original-text="Cash paid to the branch but not updated in the account. Please do what is required.">
@@ -310,102 +257,104 @@
                         <p>Cash paid to the branch but not updated in the account. Please do what is required.</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
-                <div class="note-card" data-id="6" data-original-text="As per client he settled his payment with Nrs. 14000 but not uploaded yet, Please proceed accordingly.">
+                <div class="note-card" data-id="6" data-original-text="As per client he settled his payment with Nrs. ____ but not uploaded yet, Please proceed accordingly">
                     <div class="note-content">
-                        <p>As per client he settled his payment with Nrs. 14000 but not uploaded yet, Please proceed accordingly.</p>
+                        <p>As per client he settled his payment with Nrs. ____ but not uploaded yet, Please proceed accordingly</p>
                     </div>
                     <form class="edit-form">
-                        <textarea rows="2" aria-label="Edit note text"></textarea>
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
                     </form>
                     <div class="actions">
                         <button class="edit-btn" aria-label="Edit note">Edit</button>
-                        <button class="copy-btn" aria-label="Copy note text">Copy</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
                     </div>
                 </div>
-        </section>
-    </main>
+                <div class="note-card" data-id="7" data-original-text="As per client he wants to change package from ___ to, costing Nrs. ___, please do needful.">
+                    <div class="note-content">
+                        <p>As per client he wants to change package fron ___ to, costing Nrs. ___, please do needful.</p>
+                    </div>
+                    <form class="edit-form">
+                        <textarea rows="1" aria-label="Edit note text"></textarea>
+                    </form>
+                    <div class="actions">
+                        <button class="edit-btn" aria-label="Edit note">Edit</button>
+                        <button class="reset-btn" aria-label="Reset note" disabled>Reset</button>
+                    </div>
+                </div>
+                </div>
+
 
     <footer class="footer">
         © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
     </footer>
 
+    <div class="copy-notification" id="copyNotification">Copied to clipboard!</div>
+
     <script>
-        // State management
-        let appState = {
-            notes: {}, // Store notes by page and ID
-            noteIdCounter: 7 // Start after initial notes
-        };
-
-        // Load state from localStorage
-        function loadState() {
-            const savedState = localStorage.getItem('hrSupportState');
-            if (savedState) {
-                appState = JSON.parse(savedState);
-            }
-        }
-
-        // Save state to localStorage
-        function saveState() {
-            localStorage.setItem('hrSupportState', JSON.stringify(appState));
-        }
-
-        // Initialize state
-        loadState();
-
+        function showNotification() {
+    alert("Welcome HR Support User!,\n        If you face any trouble while switching to 'Report an Issue,' please refresh the page. Your saved data is secure and will not be lost. Thank you for choosing HR Support!");
+}
         // Update year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Validate note input
-        function validateNoteInput(input) {
-            const errorElement = document.getElementById(`${input.id}-error`) || document.createElement('div');
-            errorElement.className = 'error-message';
-            errorElement.id = `${input.id}-error`;
-            if (!input.value.trim()) {
-                input.classList.add('error');
-                errorElement.style.display = 'block';
-                errorElement.textContent = 'Note cannot be empty.';
-                if (!input.nextElementSibling) input.parentNode.appendChild(errorElement);
+        // Copy text to clipboard
+        async function copyToClipboard(text) {
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                    showCopyNotification();
+                    return true;
+                } else {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        const successful = document.execCommand('copy');
+                        document.body.removeChild(textarea);
+                        if (successful) {
+                            showCopyNotification();
+                            return true;
+                        }
+                    } catch (err) {
+                        document.body.removeChild(textarea);
+                        console.error('Fallback copy error:', err);
+                        return false;
+                    }
+                }
+            } catch (err) {
+                console.error('Clipboard copy failed:', err);
                 return false;
-            } else {
-                input.classList.remove('error');
-                errorElement.style.display = 'none';
-                return true;
             }
+            return false;
         }
 
-        // Fallback copy function
-        function fallbackCopyText(text) {
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.opacity = '0';
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            let success = false;
-            try {
-                success = document.execCommand('copy');
-            } catch (err) {
-                console.error('Fallback copy error:', err);
-            }
-            document.body.removeChild(textArea);
-            return success;
+        // Show copy notification
+        function showCopyNotification() {
+            const notification = document.getElementById('copyNotification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000);
         }
 
         // Add event listeners to note cards
-        function addNoteListeners(noteCard, pageName) {
+        function addNoteListeners(noteCard) {
             const editBtn = noteCard.querySelector('.edit-btn');
-            const copyBtn = noteCard.querySelector('.copy-btn');
+            const resetBtn = noteCard.querySelector('.reset-btn');
             const editForm = noteCard.querySelector('.edit-form');
             const textarea = editForm.querySelector('textarea');
             const noteContent = noteCard.querySelector('.note-content');
+            const originalText = noteCard.getAttribute('data-original-text');
 
             // Initialize textarea
             const currentText = Array.from(noteContent.querySelectorAll('p'))
@@ -414,109 +363,81 @@
                 .join('\n');
             textarea.value = currentText;
 
+            // Auto-resize textarea when content changes
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = (this.scrollHeight) + 'px';
+            });
+
+            // Set initial height
+            textarea.style.height = 'auto';
+            textarea.style.height = (textarea.scrollHeight) + 'px';
+
+            // Click handler for note content (copy text)
+            noteContent.addEventListener('click', async () => {
+                const textToCopy = noteContent.textContent.trim();
+                if (textToCopy) {
+                    await copyToClipboard(textToCopy);
+                }
+            });
+
+            // Click handler for textarea (copy text only when not editing)
+            textarea.addEventListener('click', async (e) => {
+                if (!noteCard.classList.contains('editing')) {
+                    e.preventDefault();
+                    const textToCopy = textarea.value.trim();
+                    if (textToCopy) {
+                        await copyToClipboard(textToCopy);
+                    }
+                }
+            });
+
+            // Edit/Save button handler
             editBtn.addEventListener('click', () => {
                 if (noteCard.classList.contains('editing')) {
                     // Save changes
                     const newText = textarea.value.trim();
-                    if (!newText) {
-                        alert('Note cannot be empty.');
-                        return;
+                    if (newText) {
+                        noteContent.innerHTML = `<p>${newText}</p>`;
+                        noteCard.setAttribute('data-original-text', newText);
+                        // Enable reset button only if the new text differs from the original
+                        resetBtn.disabled = newText === originalText;
                     }
-                    noteContent.innerHTML = newText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
                     noteCard.classList.remove('editing');
-                    noteCard.classList.add('edited');
-                    editBtn.textContent = 'Reset';
-                    editBtn.classList.remove('save-btn');
-                    editBtn.classList.add('reset-btn');
-                    copyBtn.disabled = false;
-
-                    // Save to appState
-                    appState.notes[pageName] = appState.notes[pageName] || {};
-                    appState.notes[pageName][noteCard.dataset.id] = newText;
-                    saveState();
-                } else if (noteCard.classList.contains('edited')) {
-                    // Reset to original
-                    const originalText = noteCard.dataset.originalText;
-                    noteContent.innerHTML = originalText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
-                    textarea.value = originalText;
-                    noteCard.classList.remove('edited');
                     editBtn.textContent = 'Edit';
-                    editBtn.classList.remove('reset-btn');
-                    editBtn.classList.add('edit-btn');
-                    copyBtn.disabled = false;
-
-                    // Remove from appState
-                    if (appState.notes[pageName]) {
-                        delete appState.notes[pageName][noteCard.dataset.id];
-                        if (Object.keys(appState.notes[pageName]).length === 0) {
-                            delete appState.notes[pageName];
-                        }
-                        saveState();
-                    }
+                    resetBtn.style.display = 'block';
                 } else {
                     // Enter edit mode
                     noteCard.classList.add('editing');
                     editBtn.textContent = 'Save';
-                    editBtn.classList.remove('edit-btn');
-                    editBtn.classList.add('save-btn');
+                    resetBtn.style.display = 'none';
                     textarea.focus();
-                    copyBtn.disabled = true;
                 }
             });
 
-            copyBtn.addEventListener('click', () => {
-                const noteText = Array.from(noteContent.querySelectorAll('p'))
-                    .map(p => p.textContent.trim())
-                    .filter(text => text)
-                    .join('\n');
-                if (!noteText) {
-                    alert('No text to copy in this note.');
-                    return;
-                }
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(noteText).then(() => {
-                        copyBtn.classList.add('copied');
-                        setTimeout(() => copyBtn.classList.remove('copied'), 2000);
-                    }).catch(err => {
-                        console.warn('Clipboard API failed:', err);
-                        if (fallbackCopyText(noteText)) {
-                            copyBtn.classList.add('copied');
-                            setTimeout(() => copyBtn.classList.remove('copied'), 2000);
-                        } else {
-                            alert('Failed to copy note. Please select and copy manually.');
-                        }
-                    });
-                } else {
-                    if (fallbackCopyText(noteText)) {
-                        copyBtn.classList.add('copied');
-                        setTimeout(() => copyBtn.classList.remove('copied'), 2000);
-                    } else {
-                        alert('Failed to copy note. Please select and copy manually.');
+            // Reset button handler
+            resetBtn.addEventListener('click', () => {
+                if (confirm('Are you sure you want to reset this note to its original text?')) {
+                    noteContent.innerHTML = `<p>${originalText}</p>`;
+                    textarea.value = originalText;
+                    noteCard.setAttribute('data-original-text', originalText);
+                    textarea.style.height = 'auto';
+                    textarea.style.height = (textarea.scrollHeight) + 'px';
+                    if (noteCard.classList.contains('editing')) {
+                        noteCard.classList.remove('editing');
+                        editBtn.textContent = 'Edit';
+                        resetBtn.style.display = 'block';
                     }
+                    // Disable reset button after reset
+                    resetBtn.disabled = true;
                 }
             });
         }
 
         // Initialize existing notes
-        function initializeNotes(pageName) {
+        function initializeNotes() {
             document.querySelectorAll('.note-card').forEach(noteCard => {
-                addNoteListeners(noteCard, pageName);
-                // Apply saved edits
-                if (appState.notes[pageName] && appState.notes[pageName][noteCard.dataset.id]) {
-                    const savedText = appState.notes[pageName][noteCard.dataset.id];
-                    noteCard.querySelector('.note-content').innerHTML = savedText.split('\n')
-                        .map(line => `<p>${line}</p>`)
-                        .join('');
-                    noteCard.querySelector('.edit-form textarea').value = savedText;
-                    noteCard.classList.add('edited');
-                    noteCard.querySelector('.edit-btn').textContent = 'Reset';
-                    noteCard.querySelector('.edit-btn').classList.remove('edit-btn');
-                    noteCard.querySelector('.edit-btn').classList.add('reset-btn');
-                }
+                addNoteListeners(noteCard);
             });
         }
 
@@ -530,19 +451,10 @@
                 const doc = parser.parseFromString(html, 'text/html');
                 const newMain = doc.querySelector('main');
                 if (!newMain) throw new Error('Main content not found in page');
-
-                // Update main content
                 const mainContent = document.getElementById('main-content');
                 mainContent.innerHTML = newMain.innerHTML;
-
-                // Initialize notes for new page
-                const pageName = page.split('.')[0];
-                initializeNotes(pageName);
-
-                // Update document title
+                initializeNotes();
                 document.title = doc.querySelector('title')?.textContent || 'HR Support';
-
-                // Update URL
                 if (pushState) {
                     history.pushState({ page }, '', page);
                 }
@@ -565,55 +477,12 @@
 
         // Handle back/forward navigation
         window.addEventListener('popstate', (e) => {
-            const page = e.state?.page || 'Account.html';
+            const page = e.state?.page || 'index.html';
             loadPage(page, false);
         });
 
-        // Handle new note submission
-        const addNoteForm = document.getElementById('addNoteForm');
-        const newNoteInput = document.getElementById('newNote');
-        addNoteForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (!validateNoteInput(newNoteInput)) {
-                alert('Please enter a valid note.');
-                return;
-            }
-
-            const noteText = newNoteInput.value.trim();
-            const pageName = location.pathname.split('/').pop().split('.')[0] || 'Account';
-            const noteCard = document.createElement('div');
-            noteCard.className = 'note-card';
-            noteCard.dataset.id = appState.noteIdCounter++;
-            noteCard.dataset.originalText = noteText;
-            noteCard.innerHTML = `
-                <div class="note-content">
-                    <p>${noteText}</p>
-                </div>
-                <form class="edit-form">
-                    <textarea rows="4" aria-label="Edit note text">${noteText}</textarea>
-                </form>
-                <div class="actions">
-                    <button class="edit-btn" aria-label="Edit note">Edit</button>
-                    <button class="copy-btn" aria-label="Copy note text">Copy</button>
-                </div>
-            `;
-            document.getElementById('notes-container').appendChild(noteCard);
-            addNoteListeners(noteCard, pageName);
-
-            // Save new note
-            appState.notes[pageName] = appState.notes[pageName] || {};
-            appState.notes[pageName][noteCard.dataset.id] = noteText;
-            saveState();
-
-            addNoteForm.reset();
-            newNoteInput.focus();
-        });
-
-        // Input validation on change
-        newNoteInput.addEventListener('input', () => validateNoteInput(newNoteInput));
-
         // Initial setup
-        initializeNotes('Account');
+        initializeNotes();
         attachNavListeners();
     </script>
 </body>
