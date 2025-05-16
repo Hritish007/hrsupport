@@ -49,6 +49,45 @@
             font-weight: bold;
             text-decoration: none;
         }
+        .navbar-brand {
+            position: relative;
+            padding-left: 30px; /* Space for arrow */
+            text-decoration: none;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Right arrow before HR Support */
+        .navbar-brand::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            color: #007bff;
+            font-size: 1.4rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Pulsing animation keyframes */
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Hover effect */
+        .navbar-brand:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+            animation: pulseArrow 0.5s ease-in-out infinite;
+        }
+        
+        .navbar-brand:hover {
+            color: white;
+        }
         .nav-links {
             display: flex;
             gap: 2rem;
