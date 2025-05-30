@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router</title>
+        <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="hr.png.jpg">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: black;
+            --background-color: #1f2937;
+            --success-color: #16a34a;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            line-height: 1.6;
+            color: #1f2937;
+            background-color: rgb(31, 31, 31);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background-color: var(--secondary-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .navbar-brand {
+            position: relative;
+            padding-left: 30px; /* Space for arrow */
+            text-decoration: none;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Right arrow before HR Support */
+        .navbar-brand::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            color: #007bff;
+            font-size: 1.4rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Pulsing animation keyframes */
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Hover effect */
+        .navbar-brand:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+            animation: pulseArrow 0.5s ease-in-out infinite;
+        }
+        
+        .navbar-brand:hover {
+            color: white;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links img {
+            width: 40px;
+            transition: transform 0.2s;
+        }
+        .nav-links img:hover {
+            transform: scale(1.1);
+        }
+        .section {
+            background-color: #ffffff;
+            padding: 20px;
+            border: 1px solid #3498db;
+            border-left: 5px solid #3498db;
+            border-right: 5px solid #3498db;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
+        }
+        .text-block {
+            background: #f9fafb;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 1px solid #3498db;
+            border-left: 4px solid var(--primary-color);
+            border-right: 5px solid #3498db;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .text-block:hover {
+            background-color: #e5e7eb;
+        }
+        .text-block p {
+            margin-bottom: 0.5rem;
+        }
+         p{ color: black;
+        }
+        .footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: var(--secondary-color);
+            color: white;
+            width: 100%;
+        }
+        .notification {
+    position: fixed;
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(10px); /* Start slightly below for upward effect */
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 14px;
+}
+.notification.show {
+    transform: translateY(0); /* Move to actual spot above cursor */
+    opacity: 1;
+    animation: bounce-up 0.3s ease-out;
+}
+@keyframes bounce-up {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+        .notification.hide {
+            transform: translateY(20px); /* Slide back down */
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <a href="Router.html" data-page="Router"><img src="router.png.jpg" alt="Router" width="50"></a>
+                <a href="Account.html" data-page="Account"><img src="account.png.jpg" alt="Account" width="50"></a>
+                <a href="Slow.html" data-page="Slow"><img src="slow.png.jpg" alt="Slow" width="50"></a>
+                <a href="TV.html" data-page="TV"><img src="iptv.png.jpg" alt="TV" width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink"><img src="myworldlink.png.jpg" alt="MyWorldLink" width="50"></a>
+                <a href="index.html" data-page="index"><img src="index.png.jpg" alt="index" width="50"></a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" id="main-content">
+        <section class="section" aria-labelledby="iptv">
+            <h2 id="Router">Router</h2>
+            <div id="text-container">
+                <p><strong>Offline/GPON down Case</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Light not verified. Please do the needful.</p>
+                </div>
+               <div class="text-block" onclick="copyText(this)">
+                    <p>No light in router, please do needful, asap</p>
+                </div>
+                 <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light on auth and link. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, fiber cable has been damaged. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Disconnection problem seen, please do needful, asap</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Multiple users are offline, active users have low power level, please do needful,asap</p>
+                </div>
+                <p><strong>General</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client is requesting for cable management. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift router from one floor to another floor, please do needful asap</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift location from _____ to _____,please do needful, asap </p>
+                </div>
+            </div>  
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+        </section>
+    </main>
+
+    <script>
+        function showNotification() {
+            alert("Welcome HR Support User!,\n        If you face any trouble while switching to 'Report an Issue,' please refresh the page. Your saved data is secure and will not be lost. Thank you for choosing HR Support!");
+        }
+
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+         function copyText(event, element) {
+            // Get the text content of the paragraph inside the clicked div
+            const text = element.querySelector('p').textContent;
+            
+            // Copy text to clipboard
+            navigator.clipboard.writeText(text).then(() => {
+                // Create notification element
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = 'Copied!';
+                document.body.appendChild(notification);
+                
+                // Position notification near cursor
+              const offsetX = -35; // Slight X offset so it doesn't block the pointer
+              const offsetY = -60; // Show notification above the cursor
+
+                let posX = event.clientX + offsetX;
+                let posY = event.clientY + offsetY;
+                
+                // Ensure notification stays within viewport
+                const notificationWidth = 100; // Approximate width
+                const notificationHeight = 30; // Approximate height
+                const maxX = window.innerWidth - notificationWidth - 10;
+                const maxY = window.innerHeight - notificationHeight - 10;
+                posX = Math.min(posX, maxX);
+                posY = Math.min(posY, maxY);
+                
+                notification.style.left = posX + 'px';
+                notification.style.top = posY + 'px';
+                
+                // Show notification with slide-in and bounce
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10); // Small delay to trigger transition
+                
+                // Hide notification after 1.5 seconds
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    notification.classList.add('hide');
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300); // Wait for slide-out transition
+                }, 1500);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+
+        // Load content dynamically
+        async function loadPage(page, pushState = true) {
+            try {
+                const response = await fetch(page);
+                if (!response.ok) throw new Error('Page not found');
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const newMain = doc.querySelector('main');
+                if (!newMain) throw new Error('Main content not found in page');
+                document.getElementById('main-content').innerHTML = newMain.innerHTML;
+                document.title = doc.querySelector('title')?.textContent || 'HR Support';
+                if (pushState) {
+                    history.pushState({ page }, '', page);
+                }
+            } catch (err) {
+                console.error('Error loading page:', err);
+                document.getElementById('main-content').innerHTML = '<p>Error loading content. Please try again.</p>';
+            }
+        }
+
+        // Attach navigation listeners
+        function attachNavListeners() {
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    loadPage(page);
+                });
+            });
+        }
+
+        // Handle back/forward navigation
+        window.addEventListener('popstate', (e) => {
+            // Determine the current page from the URL
+            const currentPage = window.location.pathname.split('/').pop() || 'Router.html';
+            const page = e.state?.page || currentPage;
+            loadPage(page, false);
+        });
+
+     
+    </script>
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+</body>
+</html>
