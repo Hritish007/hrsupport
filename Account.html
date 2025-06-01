@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,169 +7,7 @@
     <title>Account</title>
         <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="hr.png.jpg">
-    <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: black;
-            --background-color: #1f2937;
-            --success-color: #16a34a;
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', Arial, sans-serif;
-            line-height: 1.6;
-            color: #1f2937;
-            background-color: rgb(31, 31, 31);
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        header {
-            background-color: var(--secondary-color);
-            padding: 1rem 0;
-            margin-bottom: 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-        }
-        .navbar-brand {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-        }
-        .navbar-brand {
-            position: relative;
-            padding-left: 30px; /* Space for arrow */
-            text-decoration: none;
-            color: white;
-            font-family: Arial, sans-serif;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-        
-        /* Right arrow before HR Support */
-        .navbar-brand::before {
-            content: '➔';
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            transform: translateX(-20px);
-            color: #007bff;
-            font-size: 1.4rem;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        
-        /* Pulsing animation keyframes */
-        @keyframes pulseArrow {
-            0%, 100% { transform: translateX(0); }
-            50% { transform: translateX(5px); }
-        }
-        
-        /* Hover effect */
-        .navbar-brand:hover::before {
-            opacity: 1;
-            transform: translateX(0);
-            animation: pulseArrow 0.5s ease-in-out infinite;
-        }
-        
-        .navbar-brand:hover {
-            color: white;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links img {
-            width: 40px;
-            transition: transform 0.2s;
-        }
-        .nav-links img:hover {
-            transform: scale(1.1);
-        }
-        .section {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #3498db;
-            border-left: 5px solid #3498db;
-            border-right: 5px solid #3498db;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
-            margin-bottom: 30px;
-        }
-        .section h2 {
-            margin-bottom: 1.5rem;
-            color: var(--secondary-color);
-        }
-        .text-block {
-            background: #f9fafb;
-            padding: 1rem;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            border: 1px solid #3498db;
-            border-left: 4px solid var(--primary-color);
-            border-right: 5px solid #3498db;
-            cursor: pointer;
-            transition: background-color 0.2s;
-        }
-        .text-block:hover {
-            background-color: #e5e7eb;
-        }
-        .text-block p {
-            margin-bottom: 0.5rem;
-        }
-        .footer {
-            text-align: center;
-            padding: 1rem 0;
-            background-color: var(--secondary-color);
-            color: white;
-            width: 100%;
-        }
-        p{ color: black;
-        }
-        
-        .notification {
-    position: fixed;
-    background-color: black;
-    color: white;
-    padding: 8px 16px;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transform: translateY(10px); /* Start slightly below for upward effect */
-    opacity: 0;
-    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-    pointer-events: none;
-    z-index: 1000;
-    font-size: 14px;
-}
-.notification.show {
-    transform: translateY(0); /* Move to actual spot above cursor */
-    opacity: 1;
-    animation: bounce-up 0.3s ease-out;
-}
-@keyframes bounce-up {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
-    100% { transform: translateY(0); }
-}
-        .notification.hide {
-            transform: translateY(20px); /* Slide back down */
-            opacity: 0;
-        }
-    </style>
+
 </head>
 <body>
     <header>
@@ -180,7 +19,7 @@
                 <a href="Slow.html" data-page="Slow.html"><img src="slow.png.jpg" alt="Slow" width="50"></a>
                 <a href="TV.html" data-page="TV.html"><img src="iptv.png.jpg" alt="TV" width="50"></a>
                 <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="MyWorldLink" width="50"></a>
-                <a href="index.html" data-page="index.html"><img src="index.png.jpg" alt="index" width="50"></a>
+                <a href="ownpin.html" data-page="ownpin.html"><img src="ownpin.png.jpg" alt="ownpin" width="50"></a>
             </div>
         </nav>
     </header>
@@ -230,7 +69,7 @@
     </main>
     <script>
         function showNotification() {
-            alert("Welcome HR Support User!,\n        If you face any trouble while switching to 'Report an Issue,' please refresh the page. Your saved data is secure and will not be lost. Thank you for choosing HR Support!");
+            alert("Welcome HR Support User!,\n        Your data on 'Report an Issue' and 'Note' is secure and will not be lost. Thank you for choosing HR Support!");
         }
 
         // Update year
