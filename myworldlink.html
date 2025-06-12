@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myworldlink</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="try.js"></script>
+        <link rel="stylesheet" href="trys.css">
+        <script src="script.js"></script>
+    <link rel="icon" type="image/png" href="hr.png.jpg">
+
+</head>
+<body>
+   <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <button onclick="togglePopup()">🚨</button>
+                <a href="router.html" data-page="router.html"><img src="router.png.jpg" alt="router" width="50"></a>
+                <a href="account.html" data-page="account.html"><img src="account.png.jpg" alt="account"width="50"></a>
+                <a href="slow.html" data-page="slow.html"><img src="slow.png.jpg" alt="slow"width="50"></a>
+                <a href="tv.html" data-page="tv.html"><img src="iptv.png.jpg" alt="TV"width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="myworldlink"width="50"></a>
+                <a href="urgentclose.html" data-page="urgentclose.html"><img src="urgentclose.png.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                <button id="theme-toggle" aria-label="Switch to dark theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="section" aria-labelledby="myWorldLink">
+            <h2>myworldlink </h2>
+            <div id="notes-container">
+                <h4>For Android Users</h4>
+                
+                 <div class="section">
+
+            <span class="comment"><b><strong>Note: If client have andriod verson 12 or higher simply follow iPhone/Windows/PC steps.<br></strong></b><strong>
+            1. Go to Wi-Fi Settings and select the SSID "myWorldLink".<br>
+            2. Click on “myWorldLink” SSID from the list.<br>
+            3. Now Click on “Advance Options<br>
+            4. Select “PEAP” in the EAP method<br>
+            5. Select “MSCHAPV2” in Phase 2 authentication<br>
+            6. Select "Do not validate" or "Unspecified" in the CA certificate field.<br>
+            7. Type your WorldLink account Username in Identity<br>
+            8. Ignore other fields<br>
+            9. In the Password section, enter your WorldLink Online Service password.<br>
+            10. Click "CONNECT"</strong></span>
+    </div>
+            </div>
+
+             <div id="notes-container">
+                <h4>For iphone Users</h4>
+                
+                 <div class="section">
+
+      <strong>
+            1. Go to Settings and Select Wi-Fi<br>
+            2. Select “myWorldLink” SSID from the list.<br>
+            3. Type your WorldLink account “Username & Password”<br>
+            4. Click “CONNECT” </strong>
+    </div>
+        </form>
+        <div class="popup" id="myPopup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hidePopup()">&times;</span>
+
+      <h2>⚡ Quick Access</h2>
+      <!-- Bookmarks -->
+      <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vTLhXrudNQookJuRHAIbUeIuAX1vLtSyQPe_QSgmtCfS-ArswcqBEMO_TIwUj9lEQatlapGn-XtgNdJ/pubhtml?pli=1" target="_blank" rel="noopener noreferrer">Department No.</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?pli=1&gid=1621541645#gid=1621541645" target="_blank" rel="noopener noreferrer">Branch Location</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1438794880#gid=1438794880" target="_blank" rel="noopener noreferrer">Packages Details</a>
+      <a class="bookmark" href="https://hritish007.github.io/hr.support/" target="_blank" rel="noopener noreferrer">Issue Pin </a>
+      <a class="bookmark" href="https://csupport.wlink.com.np/" target="_blank" rel="noopener noreferrer">C-Support</a>
+      <a class="bookmark" href="https://ebill.wlink.com.np/" target="_blank" rel="noopener noreferrer">E-Bill</a>
+      <a class="bookmark" href="https://ftth.wlink.com.np/login" target="_blank" rel="noopener noreferrer">Ftth</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1858361334#gid=1858361334" target="_blank" rel="noopener noreferrer">Iptv issue ✔</a>
+      <a class="bookmark" href="https://nettv.wlink.com.np/" target="_blank" rel="noopener noreferrer">NetTv Dashboard</a>
+      <a class="bookmark" href="https://webtv.nettv.com.np/login" target="_blank" rel="noopener noreferrer">Nettv/login</a>
+      <a class="bookmark" href="http://nagios-olt-01.wlink.com.np/nagios/" target="_blank" rel="noopener noreferrer">Nagios</a>
+      <a class="bookmark" href="https://ameyoapp.wlink.com.np:8443/app/#!home" target="_blank" rel="noopener noreferrer">Ameyoapp</a>
+
+    </div>
+  </div>
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+        </section>
+    </main>
+
+    <script>
+        function showNotification() {
+alert("Welcome, HR Support User!\n          To access 'Pin Your Issue' and 'Note', simply remove 'abc.html' from the URL and press Enter. Your data in 'Pin Your Issue' and 'Note' is secure and will not be lost. Thank you for choosing HR Support!");
+    }
+    
+ // Close popup when clicking outside of popup-content
+window.addEventListener("click", function (event) {
+  const popup = document.getElementById("myPopup");
+  const popupContent = popup.querySelector(".popup-content");
+
+  // Only close if popup is open and click target is outside popup content
+  if (
+    popup.style.display === "flex" &&
+    !popupContent.contains(event.target) &&
+    !event.target.closest("button[onclick='togglePopup()']")
+  ) {
+    popup.style.display = "none";
+  }
+});
+</script>
+
+
+</body>
+</html>

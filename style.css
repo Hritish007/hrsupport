@@ -1,0 +1,289 @@
+/* Root variables for base theming */
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: black;
+}
+
+  /* Light theme */
+[data-theme="light"] {
+    --background-color: rgb(31, 31, 31);
+    --text-color: #1f2937;
+    --section-bg: #ffffff;
+    --form-bg: #ffffff;
+    --input-border: #d1d5db;
+    --input-focus-shadow: rgba(37, 99, 235, 0.1);
+    --border-color: #3498db;
+    --header-footer-bg: var(--secondary-color);
+    --header-footer-text: white;
+    --notification-bg: black;
+    --notification-text: white;
+    --button-hover-bg: #1e40af;
+    --delete-enabled-bg: var(--error-color);
+    --delete-enabled-hover-bg: #b91c1c;
+    --reset-bg: var(--error-color);
+    --reset-hover-bg: #b91c1c;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --background-color: #1f2937;
+    --text-color: #e5e7eb;
+    --section-bg: #374151;
+    --form-bg: #374151;
+    --input-border: #6b7280;
+    --input-focus-shadow: rgba(96, 165, 250, 0.2);
+    --border-color: #60a5fa;
+    --header-footer-bg: #111827;
+    --header-footer-text: #d1d5db;
+    --notification-bg: #1f2937;
+    --notification-text: #e5e7eb;
+    --button-hover-bg: #3b82f6;
+    --delete-enabled-bg: #ef4444;
+    --delete-enabled-hover-bg: #dc2626;
+    --reset-bg: #ef4444;
+    --reset-hover-bg: #dc2626;
+}
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px; /* 👈 Base font size reduced */
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--background-color);
+  scroll-behavior: smooth;
+}
+
+
+.container {
+  max-width: 1050px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+header {
+  background-color: var(--header-footer-bg);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin-right: -330px;
+        }
+        .navbar-brand {
+            position: relative;
+            padding-left: 30px; /* Space for arrow */
+            text-decoration: none;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        /* Right arrow before HR Support */
+        .navbar-brand::before {
+            content: '➔';
+            position: absolute;
+            left: 0;
+            opacity: 0;
+            transform: translateX(-20px);
+            color: #007bff;
+            font-size: 1.4rem;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Pulsing animation keyframes */
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(5px); }
+        }
+        
+        /* Hover effect */
+        .navbar-brand:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+            animation: pulseArrow 0.5s ease-in-out infinite;
+        }
+        
+        .navbar-brand:hover {
+            color: white;
+        }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+ margin-top: 1px;
+
+
+}
+
+.nav-links img {
+  width: 40px;
+}
+button{
+  margin-right: -6px;
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+  padding: 6px 12px;
+  background-color: transparent;
+  border: none;
+  color: var(--header-footer-text);
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 4px;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  margin-left: -30px;
+}
+
+/* Main */
+main {
+  min-height: calc(100vh - 200px);
+}
+
+/* Sections */
+.section {
+  background-color: var(--section-bg);
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-left: 5px solid var(--border-color);
+  border-right: 5px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(212, 196, 196, 0.05);
+  margin-bottom: 30px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.section h2 {
+  margin-bottom: 1.5rem;
+  color: var(--secondary-color);
+  transition: color 0.3s ease;
+}
+
+/* Text Block */
+.text-block {
+  background: var(--text-block-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--primary-color);
+  border-right: 5px solid var(--border-color);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.text-block:hover {
+  background-color: var(--text-block-hover-bg);
+}
+
+.text-block p {
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 1rem 0;
+  background-color: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    background-color: black;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transform: translateY(10px); /* Start slightly below for upward effect */
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    pointer-events: none;
+    z-index: 1000;
+    font-size: 14px;
+}
+.notification.show {
+    transform: translateY(0); /* Move to actual spot above cursor */
+    opacity: 1;
+    animation: bounce-up 0.3s ease-out;
+}
+@keyframes bounce-up {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+        .notification.hide {
+            transform: translateY(20px); /* Slide back down */
+            opacity: 0;
+        }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+    padding-left: 25px;
+  }
+
+  .navbar-brand::before {
+    font-size: 1.2rem;
+  }
+
+  .section {
+    padding: 15px;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .text-block {
+    padding: 0.8rem;
+  }
+
+  #theme-toggle {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+}

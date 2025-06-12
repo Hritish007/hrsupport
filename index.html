@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Issue Pin</title>
+    <link rel="stylesheet" href="own.css">
+    <script src="main.js"></script>
+
+    <link rel="icon" type="image/png" href="pinn.png" />
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <a href="router.html" data-page="router.html"><img src="router.png.jpg" alt="router" width="50" /></a>
+                <a href="account.html" data-page="account.html"><img src="account.png.jpg" alt="account" width="50" /></a>
+                <a href="slow.html" data-page="slow.html"><img src="slow.png.jpg" alt="slow" width="50" /></a>
+                <a href="tv.html" data-page="tv.html"><img src="iptv.png.jpg" alt="TV" width="50" /></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="myworldlink" width="50"></a>
+                <a href="urgentclose.html" data-page="urgentclose.html"><img src="urgentclose.png.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                <button id="theme-toggle" aria-label="Switch to dark theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" id="main-content">
+        <div class="form-container">
+            <form id="userForm" aria-labelledby="form-title">
+                <h2 id="form-title"> Pin your Issue</h2><br />
+                <div class="form-row">
+                    <div class="form-group phone">
+                        <label for="phone"><strong>Called Number</strong></label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Contact Number."
+                            required
+                            pattern="^\d{7,15}$"
+                            maxlength="15"
+                            onkeypress="restrictToNumbers(event)"
+                            aria-describedby="phone-error"
+                        />
+                        <div class="error-message" id="phone-error">Please enter a valid phone number (7-15 digits)</div>
+                    </div>
+                    <div class="form-group username">
+                        <label for="username"><strong>Username</strong></label>
+                        <input type="text" id="username" name="username" placeholder="Enter username" required aria-describedby="username-error" />
+                        <div class="error-message" id="username-error">Please enter a valid username</div>
+                    </div>
+                    <div class="form-group issue">
+                        <label for="issue"><strong>Issue Description</strong></label>
+                        <input type="text" id="issue" name="issue" placeholder="Describe your issue" required aria-describedby="issue-error" />
+                        <div class="error-message" id="issue-error">Please describe the issue</div>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="solved-checkbox" id="solved" aria-label="Mark as solved" />
+                        <label for="solved">Solved</label>
+                    </div>
+                    <button type="button" class="delete-btn" aria-label="Delete this row" disabled>Delete</button>
+                </div>
+            </form>
+        </div>
+
+        <section class="note-container">
+            <h2 id="note">Note</h2>
+            <form id="NoteForm">
+                <div class="form-note">
+                    <textarea id="note-text" rows="8" placeholder="Enter your note here"></textarea>
+                    <div id="note-error" class="error-message"></div>
+                </div>
+                <div class="reset-btn-container">
+                    <button type="reset" onclick="return confirmReset()" class="reset-btn">Reset</button>
+                </div>
+            </form><br />
+            <footer class="footer">
+                © <span id="year"></span> HritishShaqya. Keep learning and Enjoying.
+            </footer>
+        </section>
+    </main>
+ 
+    <script>
+        // Show welcome notification
+        function showNotification() {
+                       alert("Welcome HR Support User!,\n        You can pin your issue here, and it will stay saved even if you reload the page. Thank you for choosing HR Support!");
+
+            
+        }
+
+        const form = document.getElementById("userForm");
+        const noteForm = document.getElementById("NoteForm");
+        const noteText = document.getElementById("note-text");
+        const yearSpan = document.getElementById("year");
+        yearSpan.textContent = new Date().getFullYear();
+
+        const pageName = window.location.pathname.split("/").pop().replace(".html", "");
+
+        // Restrict input to numbers only
+        function restrictToNumbers(event) {
+            const charCode = event.which || event.keyCode;
+            if (charCode !== 8 && charCode !== 13 && (charCode < 48 || charCode > 57)) {
+                event.preventDefault();
+            }
+        }
+
+        // Load saved form data from localStorage
+        function loadFormData() {
+            const savedData = localStorage.getItem(`formData_${pageName}`);
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                data.forEach((row, index) => {
+                    if (index === 0) {
+                        const firstRow = form.querySelector(".form-row");
+                        firstRow.querySelector("#username").value = row.username || "";
+                        firstRow.querySelector("#phone").value = row.phone || "";
+                        firstRow.querySelector("#issue").value = row.issue || "";
+                        firstRow.querySelector(".solved-checkbox").checked = row.solved || false;
+                        firstRow.querySelector(".delete-btn").disabled = !row.solved;
+                        firstRow.querySelector(".delete-btn").classList.toggle("enabled", row.solved);
+                    } else {
+                        addNewRow(row);
+                    }
+                });
+            }
+        }
+
+        // Save current form data to localStorage
+        function saveFormData() {
+            const rows = form.querySelectorAll(".form-row");
+            const data = Array.from(rows).map((row) => ({
+                username: row.querySelector('input[name="username"]').value,
+                phone: row.querySelector('input[name="phone"]').value,
+                issue: row.querySelector('input[name="issue"]').value,
+                solved: row.querySelector(".solved-checkbox").checked,
+            }));
+            localStorage.setItem(`formData_${pageName}`, JSON.stringify(data));
+        }
+
+        // Validate generic input field
+        function validateInput(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            if (!input.value.trim()) {
+                input.classList.add("error");
+                errorElement.style.display = "block";
+                return false;
+            } else {
+                input.classList.remove("error");
+                errorElement.style.display = "none";
+                return true;
+            }
+        }
+
+        // Validate phone input specifically
+        function validatePhone(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            const phoneRegex = /^\d{7,15}$/;
+            if (!phoneRegex.test(input.value)) {
+                input.classList.add("error");
+                errorElement.style.display = "block";
+                return false;
+            } else {
+                input.classList.remove("error");
+                errorElement.style.display = "none";
+                return true;
+            }
+        }
+
+        // Enable or disable delete buttons based on solved checkbox
+        function updateDeleteButtons() {
+            const rows = form.querySelectorAll(".form-row");
+            rows.forEach((row) => {
+                const checkbox = row.querySelector(".solved-checkbox");
+                const deleteBtn = row.querySelector(".delete-btn");
+                deleteBtn.disabled = !checkbox.checked;
+                deleteBtn.classList.toggle("enabled", checkbox.checked);
+            });
+        }
+
+        // Add event listeners to inputs and buttons in a row
+        function addInputListeners(row) {
+            const inputs = row.querySelectorAll('input:not(.solved-checkbox)');
+            const checkbox = row.querySelector(".solved-checkbox");
+            const deleteBtn = row.querySelector(".delete-btn");
+
+            inputs.forEach((input, index) => {
+                input.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        if (input.id.includes("issue")) {
+                            const phoneInput = row.querySelector('input[name="phone"]');
+                            const usernameInput = row.querySelector('input[name="username"]');
+                            const isPhoneValid = validatePhone(phoneInput);
+                            const isUsernameValid = validateInput(usernameInput);
+
+                            if (!isPhoneValid) {
+                                phoneInput.focus();
+                            } else if (!isUsernameValid) {
+                                usernameInput.focus();
+                            } else {
+                                addNewRow();
+                            }
+                        } else if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    }
+                });
+
+                input.addEventListener("input", () => {
+                    if (input.id.includes("phone")) {
+                        input.value = input.value.replace(/[^0-9]/g, "");
+                        validatePhone(input);
+                    } else {
+                        validateInput(input);
+                    }
+                    saveFormData();
+                });
+            });
+
+            checkbox.addEventListener("change", () => {
+                deleteBtn.disabled = !checkbox.checked;
+                deleteBtn.classList.toggle("enabled", checkbox.checked);
+                saveFormData();
+            });
+
+            deleteBtn.addEventListener("click", () => {
+                row.remove();
+                updateDeleteButtons();
+                saveFormData();
+            });
+        }
+
+        // Add a new row to the form, optionally with saved data
+        function addNewRow(savedData = null) {
+            const timestamp = Date.now();
+            const newRow = document.createElement("div");
+            newRow.className = "form-row";
+            newRow.innerHTML = `
+                <div class="form-group phone">
+                    <label for="phone-${timestamp}"><strong>Called Number</strong></label>
+                    <input type="tel" id="phone-${timestamp}" name="phone" placeholder="Contact Number." required pattern="^\\d{7,15}$" maxlength="15" onkeypress="restrictToNumbers(event)" aria-describedby="phone-${timestamp}-error" />
+                    <div class="error-message" id="phone-${timestamp}-error">Please enter a valid phone number (7-15 digits)</div>
+                </div>
+                <div class="form-group username">
+                    <label for="username-${timestamp}"><strong>Username</strong></label>
+                    <input type="text" id="username-${timestamp}" name="username" placeholder="Enter username" required aria-describedby="username-${timestamp}-error" />
+                    <div class="error-message" id="username-${timestamp}-error">Please enter a valid username</div>
+                </div>
+                <div class="form-group issue">
+                    <label for="issue-${timestamp}"><strong>Issue Description</strong></label>
+                    <input type="text" id="issue-${timestamp}" name="issue" placeholder="Describe your issue" required aria-describedby="issue-${timestamp}-error" />
+                    <div class="error-message" id="issue-${timestamp}-error">Please describe the issue</div>
+                </div>
+                <div class="checkbox-container">
+                    <input type="checkbox" class="solved-checkbox" id="solved-${timestamp}" aria-label="Mark as solved" />
+                    <label for="solved-${timestamp}">Solved</label>
+                </div>
+                <button type="button" class="delete-btn" aria-label="Delete this row" disabled>Delete</button>
+            `;
+            form.appendChild(newRow);
+            addInputListeners(newRow);
+            updateDeleteButtons();
+
+            if (savedData) {
+                newRow.querySelector(`#username-${timestamp}`).value = savedData.username || "";
+                newRow.querySelector(`#phone-${timestamp}`).value = savedData.phone || "";
+                newRow.querySelector(`#issue-${timestamp}`).value = savedData.issue || "";
+                newRow.querySelector(`#solved-${timestamp}`).checked = savedData.solved || false;
+                newRow.querySelector(".delete-btn").disabled = !savedData.solved;
+                newRow.querySelector(".delete-btn").classList.toggle("enabled", savedData.solved);
+            }
+
+            newRow.querySelector("input:not(.solved-checkbox)").focus();
+        }
+
+        // Save note text to localStorage
+        function saveNoteData() {
+            localStorage.setItem(`noteData_${pageName}`, noteText.value);
+        }
+
+        // Load note text from localStorage
+        function loadNoteData() {
+            const savedNote = localStorage.getItem(`noteData_${pageName}`);
+            if (savedNote) {
+                noteText.value = savedNote;
+            }
+        }
+
+        noteText.addEventListener("input", saveNoteData);
+
+        noteForm.addEventListener("reset", () => {
+            localStorage.removeItem(`noteData_${pageName}`);
+        });
+
+        function confirmReset() {
+            return confirm("Are you sure you want to reset the Note?");
+        }
+
+        // Initialization
+        document.querySelectorAll(".form-row").forEach(addInputListeners);
+        updateDeleteButtons();
+        loadFormData();
+        loadNoteData();
+
+    </script>
+</body>
+</html>

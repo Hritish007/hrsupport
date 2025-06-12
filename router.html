@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Router</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="trys.css">
+    <script src="try.js"></script>
+    <link rel="icon" type="image/png" href="hr.png.jpg">
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <button onclick="togglePopup()">🚨</button>
+                <a href="router.html" data-page="router.html"><img src="router.png.jpg" alt="router" width="50"></a>
+                <a href="account.html" data-page="account.html"><img src="account.png.jpg" alt="account"width="50"></a>
+                <a href="slow.html" data-page="slow.html"><img src="slow.png.jpg" alt="slow"width="50"></a>
+                <a href="tv.html" data-page="tv.html"><img src="iptv.png.jpg" alt="TV"width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="myworldlink"width="50"></a>
+                <a href="urgentclose.html" data-page="urgentclose.html"><img src="urgentclose.png.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                <button id="theme-toggle" aria-label="Switch to dark theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" id="main-content">
+        <section class="section" aria-labelledby="router">
+            <h2 id="router">Router</h2>
+            <div id="text-container">
+                <p><strong>Offline/GPON down Case</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Light not verified. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light in router, please do needful, asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>No light on auth and link. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, fiber cable has been damaged. Please do the needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Disconnection problem seen, please do needful, asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Multiple users are offline, active users have low power level, please do needful, asap.</p>
+                </div>
+                <p><strong>General</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client is requesting for cable management. Please proceed accordingly.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift router from one floor to another floor, please do needful asap.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to shift location from _____ to _____, please do needful, asap.</p>
+                </div>
+            </div>
+        <div class="popup" id="myPopup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hidePopup()">&times;</span>
+
+      <h2>⚡ Quick Access</h2>
+      <!-- Bookmarks -->
+      <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vTLhXrudNQookJuRHAIbUeIuAX1vLtSyQPe_QSgmtCfS-ArswcqBEMO_TIwUj9lEQatlapGn-XtgNdJ/pubhtml?pli=1" target="_blank" rel="noopener noreferrer">Department No.</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?pli=1&gid=1621541645#gid=1621541645" target="_blank" rel="noopener noreferrer">Branch Location</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1438794880#gid=1438794880" target="_blank" rel="noopener noreferrer">Packages Details</a>
+      <a class="bookmark" href="https://hritish007.github.io/hr.support/" target="_blank" rel="noopener noreferrer">Issue Pin </a>
+      <a class="bookmark" href="https://csupport.wlink.com.np/" target="_blank" rel="noopener noreferrer">C-Support</a>
+      <a class="bookmark" href="https://ebill.wlink.com.np/" target="_blank" rel="noopener noreferrer">E-Bill</a>
+      <a class="bookmark" href="https://ftth.wlink.com.np/login" target="_blank" rel="noopener noreferrer">Ftth</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1858361334#gid=1858361334" target="_blank" rel="noopener noreferrer">Iptv issue ✔</a>
+      <a class="bookmark" href="https://nettv.wlink.com.np/" target="_blank" rel="noopener noreferrer">NetTv Dashboard</a>
+      <a class="bookmark" href="https://webtv.nettv.com.np/login" target="_blank" rel="noopener noreferrer">Nettv/login</a>
+      <a class="bookmark" href="http://nagios-olt-01.wlink.com.np/nagios/" target="_blank" rel="noopener noreferrer">Nagios</a>
+      <a class="bookmark" href="https://ameyoapp.wlink.com.np:8443/app/#!home" target="_blank" rel="noopener noreferrer">Ameyoapp</a>
+    </div>
+  </div>
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+        </section>
+    </main>
+    <script>
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Show notification
+        function showNotification() {
+alert("Welcome, HR Support User!\n          To access 'Pin Your Issue' and 'Note', simply remove 'abc.html' from the URL and press Enter. Your data in 'Pin Your Issue' and 'Note' is secure and will not be lost. Thank you for choosing HR Support!");
+        }
+         // Close popup when clicking outside of popup-content
+window.addEventListener("click", function (event) {
+  const popup = document.getElementById("myPopup");
+  const popupContent = popup.querySelector(".popup-content");
+
+  // Only close if popup is open and click target is outside popup content
+  if (
+    popup.style.display === "flex" &&
+    !popupContent.contains(event.target) &&
+    !event.target.closest("button[onclick='togglePopup()']")
+  ) {
+    popup.style.display = "none";
+  }
+});
+    </script>
+</body>
+</html>

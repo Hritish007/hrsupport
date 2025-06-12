@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+            <link rel="stylesheet" href="trys.css">
+            <script src="try.js"></script>
+
+
+    <link rel="icon" type="image/png" href="hr.png.jpg">
+</head>
+<body>
+    <header>
+        <nav class="navbar container">
+            <a class="navbar-brand" onclick="showNotification()">HR Support</a>
+            <div class="nav-links">
+                <button onclick="togglePopup()">🚨</button>
+                <a href="router.html" data-page="router.html"><img src="router.png.jpg" alt="router" width="50"></a>
+                <a href="account.html" data-page="account.html"><img src="account.png.jpg" alt="account"width="50"></a>
+                <a href="slow.html" data-page="slow.html"><img src="slow.png.jpg" alt="slow"width="50"></a>
+                <a href="tv.html" data-page="tv.html"><img src="iptv.png.jpg" alt="TV"width="50"></a>
+                <a href="myworldlink.html" data-page="myworldlink.html"><img src="myworldlink.png.jpg" alt="myworldlink"width="50"></a>
+                <a href="urgentclose.html" data-page="urgentclose.html"><img src="urgentclose.png.jpg" alt="urgentclose" style="width: 45px; height: auto;"></a>
+                <button id="theme-toggle" aria-label="Switch to dark theme">🌙</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container" id="main-content">
+        <section class="section" aria-labelledby="Account">
+            <h2 id="Account">Account</h2>
+            <div id="text-container">
+                <p><strong>Accound Extend</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account extended for 3 days. Suggested to use My WorldLink app and also suggested to pay.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client has already account extended for 3 days, Suggested to pay.</p>
+                </div>
+                <p><strong>Account Disable-Pending transaction</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Account enabled for once and also suggested to say.</p>
+                </div>
+                <p><strong>Acound Status</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client, he/she was offered a 1-month bonus after payment. Payment done, but it hasn't been added. Please proceed accordingly..</p>
+                </div>
+                <p><strong>Payment</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he paid his money through ESEWA but the payment is not received, suggested to contact with vender.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want bonus while paying on the same package, please do needful.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to our staff but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Cash paid to the branch but not updated in the account. Please do what is required.</p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>As per client he settled his payment with Nrs. ____ but not uploaded yet, Please proceed accordingly.</p>
+                </div>
+                <p><strong>Query About Package</strong></p>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to downgrade package, please do needful, asap. </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want to upgrade package to ____, please do needful, asap. </p>
+                </div>
+                <div class="text-block" onclick="copyText(event, this)">
+                    <p>Client want _____ package for __ months , NRs. ____, please do needful, asap.</p>
+                </div>
+            </div>
+            <div class="popup" id="myPopup">
+    <div class="popup-content">
+      <span class="close-btn" onclick="hidePopup()">&times;</span>
+
+      <h2>⚡ Quick Access</h2>
+      <!-- Bookmarks -->
+      <a class="bookmark" href="https://epayment.worldlink.com.np/new/internet-payment" target="_blank" rel="noopener noreferrer">E-payment</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/u/0/d/e/2PACX-1vTLhXrudNQookJuRHAIbUeIuAX1vLtSyQPe_QSgmtCfS-ArswcqBEMO_TIwUj9lEQatlapGn-XtgNdJ/pubhtml?pli=1" target="_blank" rel="noopener noreferrer">Department No.</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?pli=1&gid=1621541645#gid=1621541645" target="_blank" rel="noopener noreferrer">Branch Location</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1438794880#gid=1438794880" target="_blank" rel="noopener noreferrer">Packages Details</a>
+      <a class="bookmark" href="https://hritish007.github.io/hr.support/" target="_blank" rel="noopener noreferrer">Issue Pin </a>
+      <a class="bookmark" href="https://csupport.wlink.com.np/" target="_blank" rel="noopener noreferrer">C-Support</a>
+      <a class="bookmark" href="https://ebill.wlink.com.np/" target="_blank" rel="noopener noreferrer">E-Bill</a>
+      <a class="bookmark" href="https://ftth.wlink.com.np/login" target="_blank" rel="noopener noreferrer">Ftth</a>
+      <a class="bookmark" href="https://docs.google.com/spreadsheets/d/1yCLvefgWU_SnU3OIPX_GBJWorQFRE1SASISzv6SJLbM/edit?gid=1858361334#gid=1858361334" target="_blank" rel="noopener noreferrer">Iptv issue ✔</a>
+      <a class="bookmark" href="https://nettv.wlink.com.np/" target="_blank" rel="noopener noreferrer">NetTv Dashboard</a>
+      <a class="bookmark" href="https://webtv.nettv.com.np/login" target="_blank" rel="noopener noreferrer">Nettv/login</a>
+      <a class="bookmark" href="http://nagios-olt-01.wlink.com.np/nagios/" target="_blank" rel="noopener noreferrer">Nagios</a>
+      <a class="bookmark" href="https://ameyoapp.wlink.com.np:8443/app/#!home" target="_blank" rel="noopener noreferrer">Ameyoapp</a>
+
+    </div>
+  </div>
+    <footer class="footer">
+        © <span id="year">2025</span> HritishShaqya. Keep learning and Enjoying.
+    </footer>
+
+        </section>
+    </main>
+    <script>
+        function showNotification() {
+alert("Welcome, HR Support User!\n          To access 'Pin Your Issue' and 'Note', simply remove 'abc.html' from the URL and press Enter. Your data in 'Pin Your Issue' and 'Note' is secure and will not be lost. Thank you for choosing HR Support!");
+        }
+
+        // Update year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

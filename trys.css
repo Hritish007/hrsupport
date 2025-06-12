@@ -1,0 +1,116 @@
+
+
+/* Main button */
+button {
+  font-size: 16px;
+  padding: 5px 0px;
+  background: none;
+  color: white;
+  height: 44px;
+  width: 44px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  
+} 
+
+button:hover {
+  background: #c0392b;
+}
+ 
+
+/* Popup backdrop */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0px;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Popup content box */
+.popup-content {
+  position: relative;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 30px 20px;
+  max-width: 600px;
+  max-height: 80vh; /* Limit the height */
+  overflow-y: auto;  /* Enable vertical scrolling */
+  margin: 100px auto;
+  animation: slideDown 0.3s ease-out;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.popup-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.popup-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.popup-content::-webkit-scrollbar-thumb {
+  background-color: #bbb;
+  border-radius: 10px;
+}
+
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+/* Heading */
+.popup-content h2 {
+  margin-bottom: 25px;
+  font-size: 24px;
+  color: #2c3e50;
+}
+
+/* Bookmark link styles */
+.bookmark {
+  display: block;
+  background: #3498db;
+  color: white;
+  width: 400px;
+  padding: 12px 12px;
+  margin: 10px auto; /* Center horizontally */
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center; /* Optional: center the text inside */
+  
+}
+
+
+.bookmark:hover {
+  background: #2980b9;
+  transform: scale(1.03);
+}
+
+/* Popup animation */
+@keyframes slideDown {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
